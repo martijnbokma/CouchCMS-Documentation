@@ -19,7 +19,7 @@ The documentation is built with Astro + Starlight and has the following structur
 └── tsconfig.json
 ```
 
-The documentation consists of `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is converted to a route based on its filename.
+The documentation consists of `.mdx` files in the `src/content/docs/` directory. Each file is converted to a route based on its filename.
 
 Images can be added to `src/assets/` and embedded in Markdown with a relative link.
 
