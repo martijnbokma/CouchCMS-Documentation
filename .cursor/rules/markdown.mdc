@@ -252,6 +252,17 @@ This ensures Prettier will:
   + new code
   ```
 
+- CRITICAL: Never modify code block titles that contain filenames:
+
+  - If title shows a filename like `php title="blog.php"`, keep it exactly as is
+  - Only add descriptive titles for code blocks without filenames
+  - Preserve the exact filename, extension and quotes in the title
+  - Examples of titles to preserve:
+    - `php title="config.php"`
+    - `html title="index.html"`
+    - `js title="script.js"`
+    - `css title="style.css"`
+
 - Use proper syntax highlighting
 - Add comments for complex code
 - Show changes with diff syntax when relevant
@@ -345,6 +356,22 @@ When using the Steps component:
 - Add empty lines before and after the component
 
 Note: Always add a blank line after opening and before closing the Steps component.
+
+#### Card Component
+
+The Card component has specific formatting rules:
+
+- Never indent the Card component or its content
+- Keep original spacing and line breaks
+- Example:
+
+```markdown title="Card Example"
+<Card icon="download" title="Download Code">
+
+[Download Couchified Code](https://www.couchcms.com/docs/code/blog.zip)
+
+</Card>
+```
 
 #### FileTree Component
 
@@ -609,7 +636,7 @@ Couch supports the use of Pretty URLs (aka search engine friendly - SEF URLs). T
 
 ### 3.2. Indentation and Spacing
 
-- Always use 4 spaces for indentation everywhere
+- Always use 4 spaces for indentation everywhere EXCEPT for code blocks
 - One blank line before and after:
   - Headers
   - Code blocks
