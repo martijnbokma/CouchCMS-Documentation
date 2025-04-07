@@ -7,7 +7,7 @@
       "files": ["*.md", "*.mdx"],
       "options": {
         "singleQuote": false,
-        "printWidth": 1
+        "printWidth": 120
       }
     }
   ]
