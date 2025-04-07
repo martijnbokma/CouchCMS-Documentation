@@ -6,13 +6,11 @@ alwaysApply: true
 
 # CouchCMS Documentation Style Guide
 
-This comprehensive style guide outlines all rules for writing CouchCMS
-documentation. The primary goals are consistency, readability, maintainability,
-and accessibility.
+This comprehensive style guide outlines all rules for writing CouchCMS documentation. The primary goals are consistency, readability, maintainability, and accessibility.
 
-## 1. Document Structure
+## 1. Document Organization
 
-### 1.1 Required Frontmatter
+### 1.1. Required Frontmatter
 
 Every document MUST begin with frontmatter:
 
@@ -45,7 +43,7 @@ SEO Requirements:
 - Use descriptive slugs for URLs
 - Include meta descriptions
 
-### 1.2 Document Layout
+### 1.2. Document Layout
 
 1. Frontmatter
 2. Import statements
@@ -59,7 +57,7 @@ Spacing:
 - One blank line between subsections (H3, H4)
 - One blank line before/after code blocks and admonitions
 
-### Document Ending
+### 1.3. Document Ending
 
 The end of each document should follow this structure:
 
@@ -87,9 +85,9 @@ Example of a complete document ending:
 [Next Chapter: **Starting Simple - The About Us Page**](../about-us/)
 ```
 
-## 2. Content Formatting
+## 2. Content Guidelines
 
-### 2.1 Text Elements
+### 2.1. Text Formatting
 
 Use consistent formatting:
 
@@ -158,7 +156,7 @@ Use consistent formatting:
 
 - Never mix styles (e.g., don't use both \* and ` for same term)
 
-### 2.2 Quote Usage
+### 2.2. Quote Usage
 
 Use double quotes (") consistently in Markdown:
 
@@ -226,35 +224,37 @@ This ensures Prettier will:
 - Preserve single quotes in code examples
 - Maintain consistent formatting
 
-### 2.3 Code Examples
+### 2.3. Code Examples
 
 - Include complete, working examples
 - Add descriptive titles using these patterns:
 
-  - Configuration files:
-    ```php title="config.php"
-    // Configuration example
-    ```
-  - URL examples:
-    ```txt title="Default URL"
-    https://example.com/page.php?id=1
-    ```
-    ```txt title="Pretty URL"
-    https://example.com/page/title/
-    ```
-  - Code with changes:
-    ```html title="Dynamic Path"
-    <link href="<cms:show k_site_link />css/style.css" rel="stylesheet" />
-    ```
+  For configuration files:
+
+  ```php title="config.php"
+  // Configuration example
+  ```
+
+  For URLs:
+
+  ```txt title="Default URL"
+  https://example.com/page.php?id=1
+  ```
+
+  ```txt title="Pretty URL"
+  https://example.com/page/title/
+  ```
+
+  For code changes:
+
+  ```diff title="Code Changes"
+  - old code
+  + new code
+  ```
 
 - Use proper syntax highlighting
 - Add comments for complex code
-- Show changes with diff syntax when relevant:
-
-```diff title="Code Changes"
-- old code
-+ new code
-```
+- Show changes with diff syntax when relevant
 
 - CRITICAL: Respect and preserve original content:
 
@@ -272,23 +272,29 @@ This ensures Prettier will:
   - Preserving all syntax and formatting
   - Not removing or changing any code unless specifically requested
 
-- IMPORTANT: Never remove lines with '+' or '-' at the beginning of lines in diff code blocks, as these characters are essential for indicating added or removed code
+- IMPORTANT: Never remove lines with '+' or '-' at the beginning of lines in diff code blocks
 - Always maintain the exact formatting of diff blocks to preserve the meaning of the changes being shown
 - For partial code, use language-appropriate markers:
 
-```php
-// ... existing code ...
-```
+  For PHP:
 
-```html
-<!-- ... existing code -->
-```
+  ```php
+  // ... existing code ...
+  ```
 
-```css
-/* ... existing code */
-```
+  For HTML:
 
-### 2.4 Version Documentation
+  ```html
+  <!-- ... existing code ... -->
+  ```
+
+  For CSS:
+
+  ```css
+  /* ... existing code ... */
+  ```
+
+### 2.4. Version Documentation
 
 Use version badges to indicate feature availability:
 
@@ -312,7 +318,7 @@ Use version badges to:
 - Show deprecated features
 - Highlight new features
 
-### 2.5 Components
+### 2.5. Components and UI Elements
 
 Import components at the top after frontmatter:
 
@@ -359,7 +365,7 @@ The FileTree component has specific formatting rules:
   </FileTree>
   ```
 
-### 2.6 Images
+### 2.6. Media and Assets
 
 Requirements:
 
@@ -456,7 +462,7 @@ assets/
 
 Note: Always place the caption on a new line after the image using a blockquote (>) prefix. This ensures the caption is properly displayed and accessible to screen readers.
 
-### 2.7 Links and References
+### 2.7. Links and References
 
 Internal links:
 
@@ -506,58 +512,64 @@ This ensures:
 [CouchCMS Documentation](https://docs.couchcms.com)
 ```
 
-### 2.8 Lists and Tables
+### 2.8. Tables and Lists
 
-Lists:
+#### Tables
 
-- Use `-` for unordered lists
-- 4 spaces indentation
-- Parallel structure
+- Use standard markdown table syntax
+- Align columns consistently:
+  ```markdown
+  | Header 1 | Header 2 | Header 3 |
+  | :------- | :------: | -------: |
+  | Left     |  Center  |    Right |
+  ```
+- Use hyphen (-) for empty cells
+- Minimum 3 dashes for header separation
+- Always include header row
+
+#### Lists
+
+- Unordered lists: Use hyphen (-)
+- Ordered lists: Use 1. for all items
+- Nested lists: 4 space indentation
 - Group related items
-- Blank lines between groups
+- Use parallel structure
+- Example:
 
-Tables:
+  ```markdown
+  - Main item
+    - Sub item
+      - Sub-sub item
 
-- Left-align text (`:---`)
-- Right-align numbers (`---:`)
-- Center headers (`:-:`)
-- Use backticks for code
-- Use `-` for empty cells
+  1. First step
+     - Sub point
+     - Another sub point
+  2. Second step
+  ```
 
-```markdown title="Table Example"
-| Feature    | Type    | Default | Description   |
-| :--------- | :------ | ------: | :------------ |
-| `name`     | string  |       - | Property name |
-| `type`     | string  |  `text` | Input type    |
-| `required` | boolean | `false` | Is required?  |
-| `max`      | number  |   `100` | Maximum value |
-```
+### 2.9. Admonitions and Callouts
 
-Note: Always include header row and alignment markers.
+Use appropriate admonition types:
 
-### 2.9 Admonitions
-
-Admonitions should always have descriptive titles that indicate their purpose:
-
-```markdown title="Admonition Examples"
-:::note[Server Requirements]
-Technical requirements or prerequisites
+```markdown
+:::note[Context]
+For background information or prerequisites
 :::
 
 :::tip[Best Practice]
-Recommended approach or helpful tip
+For recommended approaches
 :::
 
-:::caution[Version Specific]
-Important limitation or version requirement
+:::caution[Important]
+For version-specific or limitation notes
 :::
 
-:::danger[Breaking Change]
-Critical warning about data loss or compatibility
+:::danger[Warning]
+For critical warnings or breaking changes
 :::
 ```
 
-Rules:
+Rules for admonitions:
 
 - Use descriptive titles that explain the content
 - Choose appropriate type based on content:
@@ -567,9 +579,10 @@ Rules:
   - danger: Critical warnings, breaking changes
 - Keep content focused and concise
 - Don't nest admonitions
-- Maintain consistent formatting inside
+- Use consistent formatting
+- Choose appropriate type based on content importance
 
-### 2.10 Paragraph Structure
+### 2.10. Paragraph Structure
 
 Guidelines for clear and readable paragraphs:
 
@@ -585,7 +598,52 @@ Example:
 Couch supports the use of Pretty URLs (aka search engine friendly - SEF URLs). This feature uses URL rewriting to transform the default Couch URLs containing querystrings into URLs that appear more friendly and relevant to the web pages. For example, a URL like this:
 ```
 
-## 3. Quality Standards
+## 3. Technical Standards
+
+### 3.1. Line Length and Wrapping
+
+- Maximum line length: 80 characters for content
+- Code blocks may extend to 120 characters
+- Use soft wrapping for long content
+- Break URLs between path segments
+
+### 3.2. Indentation and Spacing
+
+- Always use 4 spaces for indentation everywhere
+- One blank line before and after:
+  - Headers
+  - Code blocks
+  - Lists
+  - Tables
+  - Admonitions
+- Use 4 spaces for nested lists
+- Use 4 spaces for code blocks
+- Use 4 spaces for blockquotes
+- Use 4 spaces for admonitions
+- Never use tabs, only spaces
+
+### 3.3. Special Characters
+
+- Use UTF-8 encoding
+- Escape special characters when needed:
+  - Backslash: `\\`
+  - Backtick: `` ` ``
+  - Asterisk: `\*`
+- Use HTML entities for:
+  - Copyright: &copy;
+  - Trademark: &trade;
+  - Registered: &reg;
+
+### 3.4. Emoji Usage
+
+- Use emojis sparingly and only when they add value
+- Common acceptable uses:
+  - ✅ Success or completion
+  - ⚠️ Warning or caution
+  - ℹ️ Information or note
+  - 🚫 Error or prohibition
+
+## 4. Quality Standards
 
 ✅ Complete frontmatter with SEO-friendly content
 ✅ Proper heading hierarchy (no skipped levels)
@@ -597,17 +655,6 @@ Couch supports the use of Pretty URLs (aka search engine friendly - SEF URLs). T
 ✅ Working code examples
 ✅ Helpful admonitions
 ✅ Accessible content structure
-
-## 4. Best Practices
-
-1. Keep technical terminology consistent
-2. Use clear, concise language
-3. Provide working code examples
-4. Include proper navigation
-5. Maintain consistent formatting
-6. Add helpful admonitions
-7. Use descriptive titles
-8. Include complete documentation
 
 ## 5. Code Preservation
 
