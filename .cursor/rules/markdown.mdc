@@ -162,7 +162,6 @@ Use double quotes (") consistently in Markdown:
 
 - Use double quotes (") for:
   - All Markdown attributes: `php title="index.php"`
-  - Image captions: ![Alt text](image.jpg "Caption")
   - Link titles: [Link](url "Title")
   - Frontmatter strings with special chars:
     `description: "A: clear, description!"`
@@ -209,7 +208,7 @@ To enforce this style, use this Prettier configuration:
       "files": ["*.md", "*.mdx"],
       "options": {
         "singleQuote": false,
-        "printWidth": 1
+        "printWidth": 120
       }
     }
   ]
@@ -262,6 +261,19 @@ This ensures Prettier will:
     - `html title="index.html"`
     - `js title="script.js"`
     - `css title="style.css"`
+
+- CRITICAL: Never modify diff code blocks:
+
+  - Always preserve the exact content of diff blocks
+  - Never remove or change the '+' and '-' markers
+  - Keep the exact indentation and spacing
+  - Preserve all line breaks
+  - Example of a diff block to preserve exactly:
+    ```diff title="example.php"
+    - old code
+    + new code
+      unchanged code
+    ```
 
 - Use proper syntax highlighting
 - Add comments for complex code
@@ -397,7 +409,6 @@ The FileTree component has specific formatting rules:
 Requirements:
 
 - Descriptive alt text explaining content/purpose
-- Caption using blockquote syntax on the next line
 - Max width: 1200px for screenshots, 300px for thumbnails
 - WebP format preferred
 - Optimize for web
