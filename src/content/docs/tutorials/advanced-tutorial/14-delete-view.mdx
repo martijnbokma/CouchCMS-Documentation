@@ -32,7 +32,7 @@ Please take a look at the snippet implementing this view - `views/notes/delete_v
 
 You'll notice that, similar to *page_view* and *create_view*, there is a `cms:pages` block enveloping all the main code:
 
-```php title="views/notes/delete_view.html - Pages Block"
+```php title="views/notes/delete_view.html"
 <cms:pages id=rt_id limit='1' show_future_entries='1'>
     // ... form shown here ...
 </cms:pages>
@@ -40,7 +40,7 @@ You'll notice that, similar to *page_view* and *create_view*, there is a `cms:pa
 
 Needless to say, it fetches the page to be deleted and makes it available to the form enclosed within the block. The form, you'll recognize, is a DataBound Form attached to the page fetched above (via its 'page_id' parameter set to `k_page_id`):
 
-```php title="views/notes/delete_view.html - Delete Form Configuration"
+```php title="views/notes/delete_view.html"
 <cms:form
     masterpage=k_template_name
     mode='edit'
@@ -81,9 +81,7 @@ The `cms:db_delete_form` tag works only from within a DataBound Form, as done ab
 
 If your design calls for deleting multiple pages, you'll have to use its sister tag named `cms:db_delete` which has no such constrains and works as a standalone statement.
 
-You'll find an example of `cms:db_delete` usage in the following thread of our forum (specifically, in answer to the post):
-
-[Deleting page from the front-end](http://www.couchcms.com/forum/viewtopic.php?f=4&t=8087)
+You'll find an example of `cms:db_delete` usage in the following thread of our forum (specifically, in answer to the post): [**Deleting page from the front-end**](http://www.couchcms.com/forum/viewtopic.php?f=4&t=8087)
 
 ### CSRF Protection
 
