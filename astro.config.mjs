@@ -31,13 +31,13 @@ export default defineConfig({
 				replacesTitle: true,
 			},
 			editLink: {
-				baseUrl: 'https://github.com/CouchCMS/Documentation/edit/gh-pages/',
+				baseUrl: 'https://github.com/CouchCMS/Documentation/edit/docs-v2/',
 			},
 			social: [
 				{
 					icon: 'github',
 					label: 'GitHub',
-					href: 'https://github.com/CouchCMS/Documentation',
+					href: 'https://github.com/CouchCMS/Documentation/tree/docs-v2',
 				},
 			],
 			tableOfContents: {
