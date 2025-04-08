@@ -31,11 +31,15 @@ export default defineConfig({
 				replacesTitle: true,
 			},
 			editLink: {
-				baseUrl: 'https://github.com/CouchCMS/Documentation/edit/main/',
+				baseUrl: 'https://github.com/CouchCMS/Documentation/edit/gh-pages/',
 			},
-			social: {
-				github: 'https://github.com/CouchCMS/Documentation',
-			},
+			social: [
+				{
+					icon: 'github',
+					label: 'GitHub',
+					href: 'https://github.com/CouchCMS/Documentation',
+				},
+			],
 			tableOfContents: {
 				minHeadingLevel: 2,
 				maxHeadingLevel: 5,
