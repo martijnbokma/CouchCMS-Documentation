@@ -48,10 +48,10 @@ function assertAgentSkill() {
 console.log("🧰 CouchCMS Documentation — unified AI tooling\n");
 console.log("   (DOCS-STANDARDS → generated configs + SKILL check + validate)\n");
 
-runNode("scripts/sync-ai-configs.js", "━━ Step 1/3 · Sync generated editor configs ━━");
+runNode("scripts/ai-sync.js", "━━ Step 1/3 · Sync generated editor configs ━━");
 assertAgentSkill();
 console.log("━━ Step 2/3 · Agent Skill (manual SKILL.md) verified ━━\n");
-runNode("scripts/validate-docs.js", "━━ Step 3/3 · Validate documentation ━━");
+runNode("scripts/docs-validate.js", "━━ Step 3/3 · Validate documentation ━━");
 
 console.log("\n✨ Done.\n");
 console.log("   Optional — install the skill for your coding agent:");

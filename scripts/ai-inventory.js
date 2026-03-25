@@ -4,12 +4,12 @@
  * optional local tools like .giga). Optionally remove allowed directories with --yes.
  *
  * Usage:
- *   node scripts/ai-tooling-inventory.js
- *   node scripts/ai-tooling-inventory.js --json
- *   node scripts/ai-tooling-inventory.js --remove .giga .vibe --dry-run
- *   node scripts/ai-tooling-inventory.js --remove .giga --yes
- *   node scripts/ai-tooling-inventory.js --remove .tabnine --yes --sync-exclude
- *   node scripts/ai-tooling-inventory.js --interactive
+ *   node scripts/ai-inventory.js
+ *   node scripts/ai-inventory.js --json
+ *   node scripts/ai-inventory.js --remove .giga .vibe --dry-run
+ *   node scripts/ai-inventory.js --remove .giga --yes
+ *   node scripts/ai-inventory.js --remove .tabnine --yes --sync-exclude
+ *   node scripts/ai-inventory.js --interactive
  */
 
 import { checkbox, confirm } from "@inquirer/prompts";
@@ -32,7 +32,7 @@ const rootDir = resolve(join(__dirname, ".."));
  * `sync`: overwritten in part or full by scripts/sync-ai-configs.js when you run bun run sync.
  * `skills`: typical Agent Skills CLI (npx/bunx skills) install targets under the repo.
  */
-const ENTRIES = [
+export const ENTRIES = [
     {
         path: ".cursor",
         label: "Cursor",
@@ -288,7 +288,7 @@ function printText(report) {
             console.log(`• ${u}/`);
         }
         console.log(
-            "\nAdd a pattern to scripts/ai-tooling-inventory.js if this should be documented.",
+            "\nAdd a pattern to scripts/ai-inventory.js if this should be documented.",
         );
     }
 
