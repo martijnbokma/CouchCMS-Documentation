@@ -3,7 +3,7 @@
  * Conflict Resolver - Helper for resolving merge conflicts
  *
  * Analyzes conflicts and provides smart resolution strategies
- * Usage: pnpm run conflicts:resolve
+ * Usage: bun run conflicts:resolve
  */
 
 import { execSync } from "child_process";
@@ -61,7 +61,7 @@ function getConflictType(file) {
 }
 
 function categorizeFile(file) {
-    if (file.includes("package.json") || file.includes("pnpm-lock.yaml")) {
+    if (file.includes("package.json") || file.includes("bun.lock")) {
         return "dependency";
     }
     if (
@@ -103,7 +103,7 @@ function getSuggestion(file, category, conflictType) {
                 action: "accept-theirs",
                 reason: "Dependencies: prefer upstream version, then reinstall",
                 command: `git checkout --theirs ${file} && git add ${file}`,
-                post: "pnpm install",
+                post: "bun install",
                 safe: true,
             };
 

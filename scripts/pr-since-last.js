@@ -3,7 +3,7 @@
  * PR Since Last - Track changes since last PR
  *
  * Shows a high-level summary of changes since the last merged PR
- * Usage: pnpm run pr:since-last
+ * Usage: bun run pr:since-last
  */
 
 import { execSync } from "child_process";
@@ -211,7 +211,7 @@ function main() {
     if (!lastPR) {
         log("⚠️  No previous PR tracked.", "yellow");
         log("\nTo start tracking, mark current state as last PR:", "yellow");
-        log("  pnpm run pr:mark-as-merged\n", "cyan");
+        log("  bun run pr:mark-as-merged\n", "cyan");
         return;
     }
 
@@ -312,18 +312,18 @@ function main() {
     log("💡 Next steps:", "bright");
     if (commits.length >= 10) {
         log("  📋 Time to create a PR!", "yellow");
-        log("     Option 1 (Automated): pnpm run pr:create", "cyan");
+        log("     Option 1 (Automated): bun run pr:create", "cyan");
         log("     Option 2 (Manual): Create PR on GitHub UI", "cyan");
     } else if (commits.length >= 5) {
         log("  📋 Consider creating a new PR soon:", "yellow");
-        log("     pnpm run pr:create", "cyan");
+        log("     bun run pr:create", "cyan");
     } else {
         log("  ⏳ Continue working. Create PR when ready.", "yellow");
     }
     log("");
 
     log("📌 To mark a new PR as merged:", "bright");
-    log('  pnpm run pr:mark-as-merged "Description of PR"\n', "cyan");
+    log('  bun run pr:mark-as-merged "Description of PR"\n', "cyan");
 }
 
 main();

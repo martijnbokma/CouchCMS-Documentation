@@ -4,7 +4,7 @@
  *
  * Creates a PR based on your tracked changes since last PR
  * Requires: GitHub CLI (gh) to be installed and authenticated
- * Usage: pnpm run pr:create
+ * Usage: bun run pr:create
  */
 
 import { execSync } from "child_process";
@@ -401,7 +401,7 @@ function main() {
     if (!lastPR) {
         log("❌ No previous PR tracked", "red");
         log("\nMark your last PR first:", "yellow");
-        log('  pnpm run pr:mark-as-merged "Last PR description"\n', "cyan");
+        log('  bun run pr:mark-as-merged "Last PR description"\n', "cyan");
         process.exit(1);
     }
 

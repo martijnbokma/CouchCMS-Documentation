@@ -1,6 +1,6 @@
 # Inbox → published MDX workflow
 
-Standard pipeline for turning **raw drafts** in `.inbox/` into **Starlight-compatible** pages under `src/content/docs/`. This aligns with [Starlight authoring guidance](https://starlight.astro.build/guides/authoring-content/) (YAML frontmatter, MDX where components are needed) and with **CouchCMS documentation policy**: preserve the original author’s intent and wording—especially for material by **Kamran Kashif**—and change only what is **strictly required** for a valid, accessible, English site.
+Standard pipeline for turning **raw drafts** in `inbox/` into **Starlight-compatible** pages under `src/content/docs/`. This aligns with [Starlight authoring guidance](https://starlight.astro.build/guides/authoring-content/) (YAML frontmatter, MDX where components are needed) and with **CouchCMS documentation policy**: preserve the original author’s intent and wording—especially for material by **Kamran Kashif**—and change only what is **strictly required** for a valid, accessible, English site.
 
 ## Principles (non-negotiable)
 
@@ -39,7 +39,7 @@ If a change is editorial (not mechanical), **label it in the PR** and get a **hu
 ### 2. Prepare the working copy
 
 - [ ] Work on a **branch**; keep the original inbox file until the PR merges (or archive a copy in git history only).
-- [ ] Run `pnpm run validate` on the repo before large edits to establish a baseline.
+- [ ] Run `bun run validate` on the repo before large edits to establish a baseline.
 
 ### 3. Conversion (use the project prompt)
 
@@ -67,9 +67,9 @@ Paste the **full** inbox content after that block.
 ### 5. Verification
 
 ```bash
-pnpm run validate
-pnpm run lint:md    # if touched paths are included
-pnpm run build      # must succeed; Starlight reports broken internal links
+bun run validate
+bun run lint:md    # if touched paths are included
+bun run build      # must succeed; Starlight reports broken internal links
 ```
 
 ### 6. Pull request
@@ -82,10 +82,14 @@ pnpm run build      # must succeed; Starlight reports broken internal links
 
 | Location | Role |
 | :--- | :--- |
-| `.inbox/` | **Drop zone** for unconverted drafts (forum exports, notes). Not published. |
+| `inbox/` | **Drop zone** for unconverted drafts (forum exports, notes). Not published (outside `src/content/docs/`, so not built by Starlight). |
 | `src/content/docs/.../*.mdx` | **Published** documentation. |
 
-Optional: add a one-line `README.md` inside `.inbox/` pointing to this file so contributors know the rules.
+This folder includes a short `README.md` so contributors know drafts are unpublished until promoted.
+
+## Naming: why `inbox/`?
+
+Starlight does not define a special folder name for imports. Official options are: publish under [`src/content/docs/`](https://starlight.astro.build/guides/pages/) or mark work-in-progress with [`draft: true`](https://starlight.astro.build/reference/frontmatter/#draft) (drafts live in the content tree but are omitted from production builds). This repo keeps **raw** forum/HTML sources **outside** the content collection in a root-level **`inbox/`** so they are never built or linked by accident. The name is short and obvious; **`drafts/`** would be an equally clear alternative if you prefer Starlight’s vocabulary.
 
 ## Related references
 

@@ -7,8 +7,8 @@ Everything you need to start using the PR Tracker in 5 minutes.
 Track your documentation changes since last upstream PR and create PRs automatically.
 
 ```bash
-pnpm run pr:since-last      # Check progress
-pnpm run pr:create          # Create PR automatically
+bun run pr:since-last      # Check progress
+bun run pr:create          # Create PR automatically
 ```
 
 ## 🚀 First Time Setup (5 minutes)
@@ -42,7 +42,7 @@ git remote add upstream https://github.com/CouchCMS/Documentation.git
 # Only run this AFTER a PR is merged by Kamran:
 git fetch upstream
 git pull upstream/docs-v2
-pnpm run pr:mark-as-merged "Initial baseline"
+bun run pr:mark-as-merged "Initial baseline"
 ```
 
 ## 🎯 Daily Usage
@@ -64,7 +64,7 @@ pnpm run pr:mark-as-merged "Initial baseline"
 ### Check Your Progress
 
 ```bash
-pnpm run pr:since-last
+bun run pr:since-last
 ```
 
 Output shows:
@@ -78,7 +78,7 @@ Output shows:
 ```bash
 # Option 1: Automated (requires GitHub CLI)
 git push origin docs-v2  # Push directly to fork
-pnpm run pr:create       # Create PR automatically
+bun run pr:create       # Create PR automatically
 # Done! PR created automatically
 
 # Option 2: Manual
@@ -92,7 +92,7 @@ git push origin docs-v2
 # ONLY AFTER your PR is merged by Kamran:
 git fetch upstream
 git pull upstream/docs-v2
-pnpm run pr:mark-as-merged "Your PR title in English"
+bun run pr:mark-as-merged "Your PR title in English"
 ```
 
 **Why?** This syncs your local branch and resets the tracker so `pr:since-last` only shows NEW changes.
@@ -110,7 +110,7 @@ pnpm run pr:mark-as-merged "Your PR title in English"
 
 ```bash
 # Show available commands
-pnpm run pr:help
+bun run pr:help
 
 # For detailed documentation:
 # - PR-TRACKER.md (main guide)
@@ -124,7 +124,7 @@ pnpm run pr:help
 You're ready to use the PR Tracker. Start with:
 
 ```bash
-pnpm run pr:since-last
+bun run pr:since-last
 ```
 
 **Happy contributing!** 🚀

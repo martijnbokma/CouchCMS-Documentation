@@ -104,11 +104,11 @@ git remote -v
 
 ```bash
 # Check your changes first
-pnpm run pr:since-last
+bun run pr:since-last
 # Output: 15 commits, 5 new pages
 
 # Create PR automatically
-pnpm run pr:create
+bun run pr:create
 
 # The script will:
 # 1. Sync with upstream
@@ -173,7 +173,7 @@ git add .
 git commit -m "docs: add examples"
 
 # Check progress
-pnpm run pr:since-last
+bun run pr:since-last
 # "5 commits, 2 pages"
 ```
 
@@ -181,11 +181,11 @@ pnpm run pr:since-last
 
 ```bash
 # Final check
-pnpm run pr:since-last
+bun run pr:since-last
 # "15 commits, 5 pages - ready!"
 
 # Create PR automatically
-pnpm run pr:create
+bun run pr:create
 ```
 
 ### Step 3: What Happens
@@ -238,7 +238,7 @@ https://github.com/CouchCMS/Documentation/pull/123
 git fetch upstream
 git merge upstream/docs-v2
 git push origin docs-v2
-pnpm run pr:mark-as-merged "Added comprehensive tag reference"
+bun run pr:mark-as-merged "Added comprehensive tag reference"
 
 # Ready for next cycle!
 ```
@@ -266,7 +266,7 @@ git push origin docs-v2
 
 ```bash
 # 1. One command
-pnpm run pr:create
+bun run pr:create
 
 # Everything else is automatic!
 
@@ -364,7 +364,7 @@ gh pr close NUMBER
 git commit -m "docs: your updates"
 
 # Or mark a different baseline
-pnpm run pr:mark-as-merged "Different baseline"
+bun run pr:mark-as-merged "Different baseline"
 ```
 
 ## 🎨 Features
@@ -403,7 +403,7 @@ Before creating PR:
 
 ```bash
 # Always check first
-pnpm run pr:since-last
+bun run pr:since-last
 
 # Only create if you have meaningful changes
 # 10+ commits or 3+ new pages is usually good
@@ -435,10 +435,10 @@ git commit -m "fixes"
 
 ```bash
 # Build locally
-pnpm run build
+bun run build
 
 # Validate
-pnpm run validate
+bun run validate
 
 # Fix any errors before creating PR
 ```
@@ -477,7 +477,7 @@ With `pr:create`, you get:
 
 **Usage:**
 ```bash
-pnpm run pr:create
+bun run pr:create
 ```
 
 **That's it!** 🚀

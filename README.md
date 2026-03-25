@@ -28,6 +28,10 @@ The documentation is built with [Astro](https://astro.build/) + [Starlight](http
 
 ---
 
+## Prerequisites
+
+- **[Bun](https://bun.sh)** (install the latest stable release; the repo uses a `bun.lock` file).
+
 ## Getting Started
 
 1. **Fork** this repository.
@@ -37,11 +41,11 @@ The documentation is built with [Astro](https://astro.build/) + [Starlight](http
     ```
 3. **Install dependencies:**
     ```sh
-    pnpm install
+    bun install
     ```
 4. **Start the dev server:**
     ```sh
-    pnpm dev
+    bun dev
     ```
 5. **Preview:**
    Visit [http://localhost:4321](http://localhost:4321) in your browser.
@@ -51,7 +55,8 @@ The documentation is built with [Astro](https://astro.build/) + [Starlight](http
 ## Working with Documentation
 
 - All docs are written in MDX (`.mdx` files in `src/content/docs/`).
-- Raw drafts may start in **`.inbox/`**; use **[INBOX-WORKFLOW.md](./INBOX-WORKFLOW.md)** to convert them with minimal edits to the author’s originals.
+- Raw drafts may start in **`inbox/`**; use **[INBOX-WORKFLOW.md](./INBOX-WORKFLOW.md)** to convert them with minimal edits to the author’s originals.
+- **Optional:** Install the [Agent Skill](https://docs.couchcms.com/miscellaneous/agent-skills/) for your coding agent (Cursor, Claude Code, Codex, and others); see **[AI-TOOLKIT.md](./AI-TOOLKIT.md)**. To **remove** skill installs, run **`bun run skills:prune`** (wrapper around **`skills remove`**). To **clear every skill from one agent** (for example before switching editors), run **`bun run agents:prune -- -a cursor -y`**. To **see which AI/editor folders** (for example **`.tabnine`**, **`.giga`**, **`.agents`**) exist in the clone and optionally delete unused ones, run **`bun run ai:list`**. For an **interactive checklist** (arrow keys, space, enter) to remove several folders at once, run **`bun run ai:pick`** or **`bun run ai:list -- --interactive`**. To **stop `bun run sync`** from regenerating a removed folder (for example Tabnine), use **`ai-sync.exclude.json`** (see **`ai-sync.exclude.example.json`** and **[scripts/README.md](scripts/README.md)**). Do **not** use `bunx skills:prune` or `bunx agents:prune` — those resolve npm packages, not these repo scripts.
 - **Follow the [CouchCMS Documentation Style Guide](./STYLEGUIDE.md) for all formatting, code, and content rules.**
 - Use clear, concise language and proper heading hierarchy.
 - Add code examples and screenshots where relevant.
@@ -87,7 +92,7 @@ The documentation is built with [Astro](https://astro.build/) + [Starlight](http
     ```sh
     git checkout -b my-feature
     ```
-2. Make your changes and test locally (`pnpm dev`).
+2. Make your changes and test locally (`bun dev`).
 3. Commit your changes:
     ```sh
     git commit -m "Describe your changes"
@@ -102,15 +107,16 @@ The documentation is built with [Astro](https://astro.build/) + [Starlight](http
 
 ## Useful Commands
 
-| Command                | Action                                     |
-| :--------------------- | :----------------------------------------- |
-| `pnpm install`         | Install dependencies                       |
-| `pnpm dev`             | Start local dev server at `localhost:4321` |
-| `pnpm run validate`    | Run documentation checks (`scripts/validate-docs.js`) |
-| `pnpm build`           | Build production site to `./dist/`         |
-| `pnpm preview`         | Preview build locally before deploying     |
-| `pnpm astro ...`       | Run Astro CLI commands                     |
-| `pnpm astro -- --help` | Get help using the Astro CLI               |
+| Command                     | Action                                                |
+| :-------------------------- | :---------------------------------------------------- |
+| `bun install`               | Install dependencies                                  |
+| `bun dev`                   | Start local dev server at `localhost:4321`          |
+| `bun run ai`                | Unified AI pipeline: sync + Agent Skill check + validate (`scripts/ai-tooling.js`) |
+| `bun run validate`          | Run documentation checks (`scripts/validate-docs.js`) |
+| `bun run build`             | Build production site to `./dist/`                    |
+| `bun run preview`           | Preview build locally before deploying                |
+| `bun run astro ...`         | Run Astro CLI commands                                |
+| `bun run astro -- --help`   | Get help using the Astro CLI                          |
 
 Pull requests run the same **validate** and **build** steps in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). See [AGENTS.md](./AGENTS.md) if validation reports an SEO title aggregate notice.
 
@@ -130,8 +136,8 @@ Convert this content to documentation format: [your content]
 
 **Documentation:**
 - **[AI-TOOLKIT.md](./AI-TOOLKIT.md)** - Main entry point and overview
-- **[QUICKSTART.md](.cursor/QUICKSTART.md)** - 30-second reference guide
-- **[Complete Guide](.cursor/README.md)** - Full toolkit documentation
+- **[archive/cursor-ai-toolkit-legacy/README.md](./archive/cursor-ai-toolkit-legacy/README.md)** - Archived legacy `.cursor` navigation (QUICKSTART, INDEX, long README)
+- **[.cursor/README.md](.cursor/README.md)** - Short hub for rules and prompts only
 - **[STYLEGUIDE.md](./STYLEGUIDE.md)** - Complete formatting rules
 
 The AI toolkit provides:
@@ -162,7 +168,7 @@ See [AI-TOOLKIT.md](./AI-TOOLKIT.md) for complete details.
 - 🎯 **[SYSTEM-OVERVIEW.md](./SYSTEM-OVERVIEW.md)** - Complete system architecture
 - 🤖 **[AI-TOOLKIT.md](./AI-TOOLKIT.md)** - Main AI toolkit guide
 - 📖 **[STYLEGUIDE.md](./STYLEGUIDE.md)** - Complete style guide
-- ⚡ **[QUICKSTART.md](.cursor/QUICKSTART.md)** - 30-second quick start
+- 📦 **[archive/cursor-ai-toolkit-legacy/](./archive/cursor-ai-toolkit-legacy/README.md)** - Archived legacy Cursor-only navigation docs
 - 🔧 **[Scripts Documentation](./scripts/README.md)** - Sync & validation tools
 
 ### CouchCMS Resources
@@ -173,11 +179,11 @@ See [AI-TOOLKIT.md](./AI-TOOLKIT.md) for complete details.
 ### Get Started
 ```bash
 # All AI tools are configured automatically!
-pnpm install
+bun install
 
 # Start writing documentation
-pnpm dev
+bun dev
 
-# Validate your work
-pnpm run validate
+# Full AI tooling check before a PR (optional)
+bun run ai
 ```

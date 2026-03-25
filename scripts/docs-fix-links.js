@@ -84,7 +84,7 @@ console.log(`Total links fixed:      ${totalFixes}\n`);
 
 if (totalFixes > 0) {
     console.log("✨ Links fixed successfully!");
-    console.log("   Run 'pnpm run validate' to verify the fixes.\n");
+    console.log("   Run 'bun run validate' to verify the fixes.\n");
 } else {
     console.log(
         "✓ No issues found - all links already have trailing slashes.\n",

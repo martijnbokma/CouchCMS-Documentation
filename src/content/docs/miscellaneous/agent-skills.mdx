@@ -1,0 +1,169 @@
+---
+title: "CouchCMS Documentation: Agent Skills for All Editors"
+description: "Install CouchCMS Documentation authoring rules in Cursor, Claude Code, Codex, or other agents using the open Agent Skills CLI, with editor selection and validation commands."
+keywords:
+    - agent skills
+    - Cursor
+    - Claude Code
+    - documentation
+    - contributors
+category: miscellaneous
+author: CouchCMS Documentation
+lastUpdated: 2026-03-25
+sidebar:
+    order: 50
+---
+
+import { Steps } from "@astrojs/starlight/components";
+
+This project ships an **[Agent Skill](https://agentskills.io/)** so contributors can load the same authoring expectations in **Cursor**, **Claude Code**, **OpenAI Codex**, and [many other agents](https://github.com/vercel-labs/skills#supported-agents), instead of relying only on files such as [`.cursorrules`](https://github.com/CouchCMS/Documentation/blob/docs-v2/.cursorrules) or [CLAUDE.md](https://github.com/CouchCMS/Documentation/blob/docs-v2/CLAUDE.md).
+
+The canonical instructions for humans and agents remain **[AGENTS.md](https://github.com/CouchCMS/Documentation/blob/docs-v2/AGENTS.md)** and **[STYLEGUIDE.md](https://github.com/CouchCMS/Documentation/blob/docs-v2/STYLEGUIDE.md)** at the repository root. The skill summarizes workflows and points to those files.
+
+## Prerequisites
+
+- **[Bun](https://bun.sh)** so you can run **`bunx`** (and install or validate the docs repo with **`bun`**).
+- A **clone** of this repository.
+- Optional: read **[AI-TOOLKIT.md](https://github.com/CouchCMS/Documentation/blob/docs-v2/AI-TOOLKIT.md)** for prompts, rules, and sync behavior.
+
+## Install the skill
+
+<Steps>
+
+1. From the repository root, list skills in this repo (optional):
+
+    ```bash
+    bunx skills add . --list
+    ```
+
+2. Install **only** the CouchCMS Documentation skill:
+
+    ```bash
+    bunx skills add . --skill couchcms-documentation -y
+    ```
+
+3. When prompted, **choose your editor** (agent), or pass **`-a`** up front so the CLI does not need to ask. Examples:
+
+    ```bash
+    bunx skills add . --skill couchcms-documentation -a cursor -y
+    bunx skills add . --skill couchcms-documentation -a claude-code -y
+    bunx skills add . --skill couchcms-documentation -a codex -y
+    ```
+
+</Steps>
+
+### Install from GitHub (fork or upstream)
+
+If you prefer not to clone first, use the GitHub shorthand or full URL (branch **`docs-v2`** matches this site’s edit links):
+
+```bash
+bunx skills add CouchCMS/Documentation --skill couchcms-documentation -a cursor -y
+```
+
+Use your fork’s `owner/repo` if you contribute from a fork.
+
+## Common agent names (`--agent` / `-a`)
+
+| Editor or agent | CLI value |
+| :---- | :----- |
+| Cursor | `cursor` |
+| Claude Code | `claude-code` |
+| OpenAI Codex | `codex` |
+| OpenCode | `opencode` |
+| Windsurf | `windsurf` |
+
+For the full list, see the [skills CLI README](https://github.com/vercel-labs/skills#supported-agents).
+
+## After installation
+
+- Run **`bun install`**, then **`bun run validate`** before pushing doc changes — or use **`bun run ai`** to run sync, verify this skill file, and validate in one step (see [`scripts/ai-tooling.js`](https://github.com/CouchCMS/Documentation/blob/docs-v2/scripts/ai-tooling.js) on GitHub).
+- If you edit **`DOCS-STANDARDS.md`**, run **`bun run sync`** (or **`bun run ai`**) and commit the generated files the project expects (see [AGENTS.md](https://github.com/CouchCMS/Documentation/blob/docs-v2/AGENTS.md)).
+
+## Updating skills
+
+```bash
+bunx skills check
+bunx skills update
+```
+
+## Remove skills from agents you no longer use
+
+Installs are **on your machine** (and sometimes under this repo as symlinks). They are **not** the same as the committed files from **`bun run sync`** (`.tabnine`, `.codewhisperer`, etc. — those stay in git unless maintainers change the sync script).
+
+:::note[Repository vs. skills CLI]
+Removing a skill with **`bunx skills remove`** does **not** delete generated editor configs from **`scripts/sync-ai-configs.js`**. To stop generating a specific editor’s files for the whole repo, that would be a change to the sync script — ask in a PR or issue.
+:::
+
+### List what is installed
+
+```bash
+bunx skills list
+bunx skills list -a cursor
+```
+
+### Remove only from specific agents
+
+Put the **skill name last** (see **`bunx skills remove --help`**). Examples:
+
+```bash
+bunx skills remove -a codex couchcms-documentation -y
+bunx skills rm --agent codex couchcms-documentation -y
+bunx skills remove -a codex -a windsurf couchcms-documentation -y
+```
+
+### Remove one skill from all agents
+
+```bash
+bunx skills remove couchcms-documentation --agent '*' -y
+```
+
+### Remove every skill from one agent
+
+```bash
+bunx skills remove --skill '*' -a cursor -y
+```
+
+### Interactive removal
+
+With no skill names, the CLI shows an interactive selection (same as the [skills CLI README](https://github.com/vercel-labs/skills#other-commands)):
+
+```bash
+bunx skills remove
+```
+
+### Repository script (`bun run skills:prune`)
+
+[`scripts/skills-agent-prune.js`](https://github.com/CouchCMS/Documentation/blob/docs-v2/scripts/skills-agent-prune.js) runs **`bun x skills remove`** with the **same arguments** — a convenience so you can run removal from the repo without typing `bun x` each time. Examples:
+
+```bash
+bun run skills:prune
+bun run skills:prune -- couchcms-documentation -y
+bun run skills:prune -- --help
+```
+
+:::caution[Do not use bunx for this command]
+**`bunx skills:prune`** is wrong — `bunx` downloads and runs **npm packages**, not scripts from this repo. Use **`bun run skills:prune`** or **`bun run skills-prune`** (hyphen alias), or **`node scripts/skills-agent-prune.js`**.
+:::
+
+### Repository script (`bun run agents:prune`)
+
+[`scripts/agents-prune.js`](https://github.com/CouchCMS/Documentation/blob/docs-v2/scripts/agents-prune.js) runs **`bun x skills remove --skill '*'`** and forwards **your** flags (for example **`-a`**). Use it to **clear every installed skill from one agent** without retyping the star. Typical use:
+
+```bash
+bun run agents:prune -- -a cursor -y
+bun run agents:prune -- --help
+```
+
+:::caution[Do not use bunx for this command]
+**`bunx agents:prune`** is wrong for the same reason as **`bunx skills:prune`**. Use **`bun run agents:prune`**, **`bun run agents-prune`**, or **`node scripts/agents-prune.js`**.
+:::
+
+Use **`bunx skills --help`** and the [skills CLI README](https://github.com/vercel-labs/skills#supported-agents) for full options.
+
+## Where the skill file lives
+
+The skill is defined at:
+
+`skills/couchcms-documentation/SKILL.md`
+
+in this repository. Adjust that file when workflows change; keep [AGENTS.md](https://github.com/CouchCMS/Documentation/blob/docs-v2/AGENTS.md) and **[DOCS-STANDARDS.md](https://github.com/CouchCMS/Documentation/blob/docs-v2/DOCS-STANDARDS.md)** as the source of truth for long-form rules.

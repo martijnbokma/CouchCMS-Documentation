@@ -23,7 +23,7 @@ Date: October 23, 2025 at 03:16 PM
 Detects non-English characters and warns you:
 
 ```bash
-$ pnpm run pr:mark-as-merged "Documentatie toegëvoegd"
+$ bun run pr:mark-as-merged "Documentatie toegëvoegd"
 
 ✅ Successfully marked as last PR!
 📍 Details:
@@ -37,7 +37,7 @@ $ pnpm run pr:mark-as-merged "Documentatie toegëvoegd"
 No warning for proper English:
 
 ```bash
-$ pnpm run pr:mark-as-merged "Added comprehensive documentation"
+$ bun run pr:mark-as-merged "Added comprehensive documentation"
 
 ✅ Successfully marked as last PR!
 📍 Details:
@@ -45,7 +45,7 @@ $ pnpm run pr:mark-as-merged "Added comprehensive documentation"
   Description: Added comprehensive documentation
 
 💡 To see changes since this PR:
-  pnpm run pr:since-last
+  bun run pr:since-last
 ```
 
 ### 3. Documentation Updates
@@ -87,16 +87,16 @@ Characters like: `ë`, `ï`, `ö`, `ü`, `ñ`, etc.
 
 **Good:**
 ```bash
-pnpm run pr:mark-as-merged "Added core tag reference"
-pnpm run pr:mark-as-merged "Fixed broken links in concepts"
-pnpm run pr:mark-as-merged "Updated tutorial with examples"
+bun run pr:mark-as-merged "Added core tag reference"
+bun run pr:mark-as-merged "Fixed broken links in concepts"
+bun run pr:mark-as-merged "Updated tutorial with examples"
 ```
 
 **Bad (triggers warning):**
 ```bash
-pnpm run pr:mark-as-merged "Tag documentatie toegëvoegd"
-pnpm run pr:mark-as-merged "Links gereparëerd"
-pnpm run pr:mark-as-merged "Tutoriäl bijgewerkt"
+bun run pr:mark-as-merged "Tag documentatie toegëvoegd"
+bun run pr:mark-as-merged "Links gereparëerd"
+bun run pr:mark-as-merged "Tutoriäl bijgewerkt"
 ```
 
 ## 🔧 Technical Implementation

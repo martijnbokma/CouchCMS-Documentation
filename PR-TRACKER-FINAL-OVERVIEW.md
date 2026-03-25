@@ -15,9 +15,9 @@ A complete automated PR tracking and creation system for contributing to [CouchC
 ### ✅ 3 Essential Commands
 
 ```bash
-pnpm run pr:since-last       # Check progress
-pnpm run pr:mark-as-merged   # Mark baseline
-pnpm run pr:create           # Auto-create PR
+bun run pr:since-last       # Check progress
+bun run pr:mark-as-merged   # Mark baseline
+bun run pr:create           # Auto-create PR
 ```
 
 ### ✅ 5 Documentation Files
@@ -36,17 +36,17 @@ pnpm run pr:create           # Auto-create PR
 
 ```bash
 # Check progress
-pnpm run pr:since-last
+bun run pr:since-last
 # "15 commits, 5 pages - ready!"
 
 # Create PR automatically
-pnpm run pr:create
+bun run pr:create
 # ✅ Syncs, pushes, creates PR
 # ✅ Opens PR URL in browser
 # ✅ Done in 30 seconds!
 
 # After merge
-pnpm run pr:mark-as-merged "Your PR title"
+bun run pr:mark-as-merged "Your PR title"
 ```
 
 **Time:** ~1 minute per PR
@@ -57,7 +57,7 @@ pnpm run pr:mark-as-merged "Your PR title"
 
 ```bash
 # Check progress
-pnpm run pr:since-last
+bun run pr:since-last
 # "15 commits, 5 pages - ready!"
 
 # Manual Git commands
@@ -69,7 +69,7 @@ git push origin docs-v2
 # (browser opens, fill in form)
 
 # After merge
-pnpm run pr:mark-as-merged "Your PR title"
+bun run pr:mark-as-merged "Your PR title"
 ```
 
 **Time:** ~5 minutes per PR
@@ -147,7 +147,7 @@ git push origin docs-v2
                    ▼
 ┌─────────────────────────────────────────────────┐
 │ 3️⃣ Create PR                                    │
-│ pnpm run pr:create                              │
+│ bun run pr:create                              │
 │ • Syncs with upstream                           │
 │ • Generates title/body                          │
 │ • Pushes to fork                                │
@@ -170,14 +170,14 @@ git push origin docs-v2
 
 ```bash
 # Daily routine
-pnpm run pr:since-last                    # Quick check
+bun run pr:since-last                    # Quick check
 
 # When ready for PR
-pnpm run pr:create                        # Auto-create
+bun run pr:create                        # Auto-create
 
 # After PR merge
 git merge upstream/docs-v2                # Sync
-pnpm run pr:mark-as-merged "PR title"    # Mark baseline
+bun run pr:mark-as-merged "PR title"    # Mark baseline
 ```
 
 ## 🎨 Feature Highlights
@@ -185,7 +185,7 @@ pnpm run pr:mark-as-merged "PR title"    # Mark baseline
 ### 1. Progress Monitoring
 
 ```bash
-$ pnpm run pr:since-last
+$ bun run pr:since-last
 
 📊 Changes Since Last PR
 
@@ -210,7 +210,7 @@ $ pnpm run pr:since-last
 ### 2. Smart PR Generation
 
 ```bash
-$ pnpm run pr:create
+$ bun run pr:create
 
 🚀 Automated PR Creation
 
@@ -239,7 +239,7 @@ https://github.com/CouchCMS/Documentation/pull/123
 ### 3. English Language Support
 
 ```bash
-$ pnpm run pr:mark-as-merged "Documentatie toegëvoegd"
+$ bun run pr:mark-as-merged "Documentatie toegëvoegd"
 
 ⚠️  Reminder: Use English for PR descriptions
    Non-English characters detected...
@@ -355,10 +355,10 @@ git remote add upstream https://github.com/CouchCMS/Documentation.git
 
 # 4. Mark baseline
 git merge upstream/docs-v2
-pnpm run pr:mark-as-merged "Initial baseline"
+bun run pr:mark-as-merged "Initial baseline"
 
 # 5. Start using!
-pnpm run pr:since-last
+bun run pr:since-last
 ```
 
 ### Option 2: Manual Tracking (1 minute setup)
@@ -369,10 +369,10 @@ git remote add upstream https://github.com/CouchCMS/Documentation.git
 
 # 2. Mark baseline
 git merge upstream/docs-v2
-pnpm run pr:mark-as-merged "Initial baseline"
+bun run pr:mark-as-merged "Initial baseline"
 
 # 3. Use manual PR creation
-pnpm run pr:since-last  # Check
+bun run pr:since-last  # Check
 # Create PR via GitHub UI
 ```
 
@@ -422,5 +422,5 @@ You now have a **professional-grade** PR management system that:
 
 **Everything is ready to use!** 🚀
 
-Start with: `pnpm run pr:help`
+Start with: `bun run pr:help`
 

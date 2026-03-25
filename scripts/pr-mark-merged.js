@@ -3,7 +3,7 @@
  * PR Mark as Merged
  *
  * Marks the current state as the last merged PR
- * Usage: pnpm run pr:mark-as-merged ["Optional PR description"]
+ * Usage: bun run pr:mark-as-merged ["Optional PR description"]
  */
 
 import { writeFileSync } from "fs";
@@ -89,7 +89,7 @@ function main() {
     }
 
     log("\n💡 To see changes since this PR:", "bright");
-    log("  pnpm run pr:since-last\n", "cyan");
+    log("  bun run pr:since-last\n", "cyan");
 
     // Check for non-English characters (Dutch: ë, ï, ö, etc.)
     if (description && /[^\x00-\x7F]/.test(description)) {

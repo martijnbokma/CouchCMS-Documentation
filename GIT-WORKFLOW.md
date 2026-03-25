@@ -85,21 +85,21 @@ git add .
 git commit -m "docs: add examples for dropdownfolders tag"
 
 # Check your progress anytime
-pnpm run pr:since-last
+bun run pr:since-last
 ```
 
 ### Step 3: Create Pull Request (No Upstream Merge!)
 
 ```bash
 # Check what you've done
-pnpm run pr:since-last
+bun run pr:since-last
 # Output: 15 commits, 5 new pages
 
 # Push directly to your fork (no upstream merge needed!)
 git push origin docs-v2
 
 # Create PR automatically
-pnpm run pr:create
+bun run pr:create
 
 # Or create manually on GitHub (see below)
 ```
@@ -129,7 +129,7 @@ git fetch upstream
 git pull upstream/docs-v2
 
 # Mark this as new baseline
-pnpm run pr:mark-as-merged "Added comprehensive tag reference for core tags"
+bun run pr:mark-as-merged "Added comprehensive tag reference for core tags"
 
 # Start next work session...
 ```
@@ -161,14 +161,14 @@ With the new workflow, conflicts should be minimal. If you still get them:
 
 ```bash
 # Use the automated conflict resolver
-pnpm run conflicts:resolve
+bun run conflicts:resolve
 
 # Or manually resolve:
 # Accept your version for config files
 git checkout --ours .cursorrules .windsurfrules package.json
 
 # Accept upstream for dependencies
-git checkout --theirs pnpm-lock.yaml
+git checkout --theirs bun.lock
 
 # Manual review for docs files
 git status
@@ -210,7 +210,7 @@ git push origin feature/my-new-feature
 
 # Use PR Tracker on main docs-v2 branch only
 git checkout docs-v2
-pnpm run pr:since-last
+bun run pr:since-last
 ```
 
 ### Scenario 4: Accidentally Committed to Wrong Branch
@@ -241,11 +241,11 @@ The PR Tracker complements this Git workflow:
 ```bash
 # ✅ MARK: After syncing with upstream
 git merge upstream/docs-v2
-pnpm run pr:mark-as-merged "Synced with upstream"
+bun run pr:mark-as-merged "Synced with upstream"
 
 # ✅ MARK: After your PR is merged
 git merge upstream/docs-v2
-pnpm run pr:mark-as-merged "Added tag documentation"
+bun run pr:mark-as-merged "Added tag documentation"
 
 # ❌ DON'T MARK: After every commit (too granular)
 ```
@@ -254,11 +254,11 @@ pnpm run pr:mark-as-merged "Added tag documentation"
 
 ```bash
 # ✅ CHECK: Before deciding to create PR
-pnpm run pr:since-last
+bun run pr:since-last
 # "15 commits, time for PR!"
 
 # ✅ CHECK: Daily standup
-pnpm run pr:since-last
+bun run pr:since-last
 # "Progress update: 5 commits this week"
 
 # ❌ DON'T CHECK: After every single commit (overkill)
@@ -307,10 +307,10 @@ git checkout docs-v2
 
 ```bash
 # Build the docs locally
-pnpm run build
+bun run build
 
 # Check for errors
-pnpm run validate
+bun run validate
 
 # Review your changes
 git diff upstream/docs-v2
@@ -369,14 +369,14 @@ git commit -m "docs: your changes"
 git push origin docs-v2
 
 # Check progress
-pnpm run pr:since-last
+bun run pr:since-last
 
 # Create PR on GitHub UI
 
 # After merge
 git fetch upstream
 git merge upstream/docs-v2
-pnpm run pr:mark-as-merged "PR title"
+bun run pr:mark-as-merged "PR title"
 ```
 
 ## 🆘 Need Help?

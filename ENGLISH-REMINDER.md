@@ -30,17 +30,17 @@ The [CouchCMS Documentation](https://github.com/CouchCMS/Documentation) is an **
 ### ✅ Good Examples (English)
 
 ```bash
-pnpm run pr:mark-as-merged "Added comprehensive tag reference for core tags"
-pnpm run pr:mark-as-merged "Fixed broken links in concepts section"
-pnpm run pr:mark-as-merged "Updated tutorial with better examples"
+bun run pr:mark-as-merged "Added comprehensive tag reference for core tags"
+bun run pr:mark-as-merged "Fixed broken links in concepts section"
+bun run pr:mark-as-merged "Updated tutorial with better examples"
 ```
 
 ### ❌ Bad Examples (Dutch)
 
 ```bash
-pnpm run pr:mark-as-merged "Tag documentatie toegevoegd"
-pnpm run pr:mark-as-merged "Links gerepareerd in concepts"
-pnpm run pr:mark-as-merged "Tutorial bijgewerkt met voorbeelden"
+bun run pr:mark-as-merged "Tag documentatie toegevoegd"
+bun run pr:mark-as-merged "Links gerepareerd in concepts"
+bun run pr:mark-as-merged "Tutorial bijgewerkt met voorbeelden"
 ```
 
 ## 🔄 Commit Message Examples
@@ -67,7 +67,7 @@ git commit -m "fixes stuff"
 The PR tracker will show a **warning** if you use non-English characters in your PR descriptions:
 
 ```bash
-pnpm run pr:mark-as-merged "Tag documentatie toegevoegd"
+bun run pr:mark-as-merged "Tag documentatie toegevoegd"
 
 ⚠️  Reminder: Use English for PR descriptions
    This makes it readable for international contributors

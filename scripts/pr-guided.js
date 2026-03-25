@@ -3,7 +3,7 @@
  * PR Guided Creation - Interactive step-by-step PR creation
  *
  * Guides you through the entire PR process with validation at each step
- * Usage: pnpm run pr:guided
+ * Usage: bun run pr:guided
  */
 
 import { execSync } from "child_process";
@@ -185,7 +185,7 @@ async function main() {
     if (!lastPR) {
         log("✗ No previous PR tracked", "red");
         log("\n  Mark your baseline first:", "yellow");
-        log('  pnpm run pr:mark-as-merged "Your last PR"\n', "cyan");
+        log('  bun run pr:mark-as-merged "Your last PR"\n', "cyan");
         process.exit(1);
     } else {
         log(
@@ -204,7 +204,7 @@ async function main() {
 
     log("Running analysis...\n", "cyan");
     try {
-        execSync("pnpm run pr:test", { stdio: "inherit" });
+        execSync("bun run pr:test", { stdio: "inherit" });
     } catch (error) {
         log("\n✗ Analysis failed", "red");
         process.exit(1);
@@ -277,7 +277,7 @@ async function automatedFlow(hasGH) {
 
     log("\n🚀 Creating PR...\n", "green");
     try {
-        execSync("pnpm run pr:create", { stdio: "inherit" });
+        execSync("bun run pr:create", { stdio: "inherit" });
         log("\n✅ PR created successfully!\n", "green");
         await postPRInstructions();
     } catch (error) {
@@ -387,7 +387,7 @@ async function postPRInstructions() {
     log("3. After your PR is merged:", "yellow");
     log("   git fetch upstream", "cyan");
     log("   git pull upstream/docs-v2", "cyan");
-    log('   pnpm run pr:mark-as-merged "Your PR title"\n', "cyan");
+    log('   bun run pr:mark-as-merged "Your PR title"\n', "cyan");
 
     log("🎊 Congratulations on your contribution!\n", "green");
 }

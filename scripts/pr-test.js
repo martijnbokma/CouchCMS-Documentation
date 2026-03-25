@@ -3,7 +3,7 @@
  * PR Create Test - Dry run of PR creation
  *
  * Shows what would be created without actually creating the PR
- * Usage: pnpm run pr:test
+ * Usage: bun run pr:test
  */
 
 import { execSync } from "child_process";
@@ -299,8 +299,8 @@ function generatePRBody(commits, categorizedFiles) {
     body += "\n## Quality Checklist\n\n";
     body += "- [x] Documentation follows DOCS-STANDARDS.md\n";
     body += "- [x] All links tested and working\n";
-    body += "- [x] Build passes locally (`pnpm run build`)\n";
-    body += "- [x] Validation passes (`pnpm run validate`)\n";
+    body += "- [x] Build passes locally (`bun run build`)\n";
+    body += "- [x] Validation passes (`bun run validate`)\n";
     body += "- [x] English language used throughout\n";
 
     return body;
@@ -321,7 +321,7 @@ function main() {
     if (!lastPR) {
         log("❌ No previous PR tracked", "red");
         log("\nMark your last PR first:", "yellow");
-        log('  pnpm run pr:mark-as-merged "Last PR description"\n', "cyan");
+        log('  bun run pr:mark-as-merged "Last PR description"\n', "cyan");
         process.exit(1);
     }
 
@@ -479,7 +479,7 @@ ${commits.map((c) => `- ${c.hash} - ${c.message}`).join("\n")}
 
 To create the actual PR:
 \`\`\`bash
-pnpm run pr:create
+bun run pr:create
 \`\`\`
 `;
 
@@ -495,7 +495,7 @@ pnpm run pr:create
     log(`\n💡 Next steps:`, "bright");
     log(`   1. Review PR-TEST-OUTPUT.md`, "yellow");
     log(`   2. Check if title and body look good`, "yellow");
-    log(`   3. If satisfied, run: pnpm run pr:create`, "cyan");
+    log(`   3. If satisfied, run: bun run pr:create`, "cyan");
     log(`   4. Or create PR manually on GitHub\n`, "cyan");
 }
 

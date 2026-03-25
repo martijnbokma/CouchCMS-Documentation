@@ -1,51 +1,36 @@
 ---
-description: Defines content hierarchy, documentation organization, and section integration processes for documentation management
-globs: src/content/**/*.mdx,src/content/**/*.md,*.md,astro.config.mjs
+description: Documentation site content hierarchy, section organization, and navigation structure
+globs: src/content/**/*,astro.config.mjs
 alwaysApply: false
 ---
 
 
 # content-structure
 
-### Documentation Organization
-The content structure is organized into distinct documentation sections:
+The documentation site employs a hierarchical content organization system with the following key components:
 
-1. **Profile Management Documentation**
-- Location: `src/content/docs/profile-management.mdx`
-- Contains student profile update workflows and validation rules
-- Structured with validation procedures and data formatting guidelines
+Content Collections:
+- Documentation sections are organized into Astro content collections
+- Navigation structure is defined through configuration rather than hard-coding
+- New documentation sections are automatically integrated via the content collection system
 
-2. **Portfolio Management Documentation**
-- Location: `src/content/docs/portfolio-updates.mdx`
-- Documents portfolio update mechanisms
-- Includes content formatting requirements and validation rules
+Section Integration Flow:
+1. Documentation files placed in content collections
+2. Automatic sidebar generation based on folder structure
+3. Navigation hierarchy derived from file frontmatter metadata
+4. Documentation sections rendered using the Starlight theme templates
 
-3. **Validation Documentation**
-- Location: `src/content/docs/validation-rules.mdx`
-- Details custom validation rules for:
-  - Email format requirements
-  - Date validations
-  - Unique identifier checks
+Primary structure (actual layout):
+```
+src/content/docs/
+  ├── getting-started/
+  ├── concepts/
+  ├── tags-reference/
+  ├── miscellaneous/
+  └── tutorials/
+```
 
-4. **Data Transformation Documentation**
-- Location: `src/content/docs/data-transformation.mdx`
-- Documents standardization processes for portfolio data
-- Covers date format conversions and content normalization rules
-
-### Navigation Structure
-The documentation implements a nested navigation system:
-- Collapsible sections for complex topics
-- Auto-generated content based on directory structure
-- Custom labels for new features
-- Integrated table of contents with specific heading levels
-
-### Content Integration Points
-- Documentation content is validated through link checking
-- Markdown formatting rules ensure consistency
-- Direct GitHub edit links for collaborative documentation maintenance
-- Integration of social links for community engagement
-
-Importance Score: 85 (Key documentation structure impacting user understanding and system maintainability)
+Sidebar order and grouping are defined in `astro.config.mjs` (including nested **Tags Reference** and **Tutorials**).
 
 $END$
 

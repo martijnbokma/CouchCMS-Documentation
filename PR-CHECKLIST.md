@@ -7,15 +7,15 @@ Use this checklist when creating a PR manually to avoid common mistakes.
 - [ ] All changes committed (`git status` is clean)
 - [ ] On correct branch (`docs-v2`)
 - [ ] Upstream remote configured (`git remote -v` shows upstream)
-- [ ] Last PR marked (`pnpm run pr:since-last` works)
+- [ ] Last PR marked (`bun run pr:since-last` works)
 
 ## ✅ Pre-PR Validation
 
-- [ ] Run test: `pnpm run pr:test`
+- [ ] Run test: `bun run pr:test`
 - [ ] Review: `PR-TEST-OUTPUT.md`
 - [ ] Review: `PR-SUMMARY.md`
-- [ ] Build passes: `pnpm run build`
-- [ ] Validation passes: `pnpm run validate`
+- [ ] Build passes: `bun run build`
+- [ ] Validation passes: `bun run validate`
 
 ## ✅ Sync with Upstream
 
@@ -94,7 +94,7 @@ docs: comprehensive documentation updates and improvements
 git fetch upstream
 git merge upstream/docs-v2
 git push origin docs-v2
-pnpm run pr:mark-as-merged "Your PR title"
+bun run pr:mark-as-merged "Your PR title"
 ```
 
 - [ ] Pulled merged changes
@@ -136,7 +136,7 @@ git branch                    # Check branch
 git remote -v                 # Check upstream
 
 # Analysis
-pnpm run pr:test             # Test PR creation
+bun run pr:test             # Test PR creation
 
 # Sync & Push
 git fetch upstream           # Get latest
@@ -144,10 +144,10 @@ git merge upstream/docs-v2   # Merge it
 git push origin docs-v2      # Push to fork
 
 # After merge
-pnpm run pr:mark-as-merged "Title"
+bun run pr:mark-as-merged "Title"
 
 # Or use guided mode
-pnpm run pr:guided           # Interactive walkthrough
+bun run pr:guided           # Interactive walkthrough
 ```
 
 ---

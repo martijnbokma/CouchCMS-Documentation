@@ -44,10 +44,10 @@ After your first PR is merged to upstream:
 git pull upstream docs-v2
 
 # Mark this as your baseline (use English!)
-pnpm run pr:mark-as-merged "Description of what was merged"
+bun run pr:mark-as-merged "Description of what was merged"
 
 # Example:
-pnpm run pr:mark-as-merged "Added dropdownfolders tag documentation"
+bun run pr:mark-as-merged "Added dropdownfolders tag documentation"
 ```
 
 **Important:** Always use English for descriptions to keep the project accessible to all contributors.
@@ -56,13 +56,13 @@ pnpm run pr:mark-as-merged "Added dropdownfolders tag documentation"
 
 ```bash
 # Check what you've done since last upstream merge
-pnpm run pr:since-last
+bun run pr:since-last
 
 # When ready for PR, push directly to your fork (no upstream merge!)
 git push origin docs-v2
 
 # Create PR automatically
-pnpm run pr:create
+bun run pr:create
 ```
 
 ## 📊 What You See
@@ -70,7 +70,7 @@ pnpm run pr:create
 ### Scenario 1: Just After Merge (Clean State)
 
 ```bash
-$ pnpm run pr:since-last
+$ bun run pr:since-last
 
 📊 Changes Since Last PR
 
@@ -86,7 +86,7 @@ $ pnpm run pr:since-last
 ### Scenario 2: After Some Work
 
 ```bash
-$ pnpm run pr:since-last
+$ bun run pr:since-last
 
 📊 Changes Since Last PR
 
@@ -154,7 +154,7 @@ git commit -m "docs: add new examples"
 git commit -m "docs: update concepts"
 
 # Check your progress
-pnpm run pr:since-last
+bun run pr:since-last
 
 # When ready for PR, push directly to your fork
 git push origin docs-v2
@@ -168,14 +168,14 @@ git push origin docs-v2
 
 ```bash
 # Check final status
-pnpm run pr:since-last
+bun run pr:since-last
 # Output shows: 15 commits, 5 new pages, 3 days work
 
 # Push your changes to your fork (no upstream merge needed!)
 git push origin docs-v2
 
 # Create PR automatically (requires GitHub CLI)
-pnpm run pr:create
+bun run pr:create
 
 # The script will:
 # 1. Generate PR title and body
@@ -191,7 +191,7 @@ pnpm run pr:create
 
 ```bash
 # Check final status
-pnpm run pr:since-last
+bun run pr:since-last
 # Output shows: 15 commits, 5 new pages, 3 days work
 
 # Push your branch to your fork (no upstream merge!)
@@ -215,7 +215,7 @@ git fetch upstream
 git pull upstream/docs-v2
 
 # Mark as new baseline
-pnpm run pr:mark-as-merged "New PR description"
+bun run pr:mark-as-merged "New PR description"
 
 # Start working on next changes...
 ```
@@ -243,16 +243,16 @@ Without step 4, the cycle doesn't restart - you're stuck on the old PR.
 
 ```bash
 # Show changes since last upstream merge
-pnpm run pr:since-last
+bun run pr:since-last
 
 # Mark current upstream state as baseline
-pnpm run pr:mark-as-merged ["Optional description"]
+bun run pr:mark-as-merged ["Optional description"]
 
 # Automatically create GitHub PR (requires GitHub CLI)
-pnpm run pr:create
+bun run pr:create
 
 # Show help
-pnpm run pr:help
+bun run pr:help
 ```
 
 ### GitHub CLI Setup (For Automated PR Creation)
@@ -311,13 +311,13 @@ This file is **local only** - it tracks your personal progress.
 git commit -m "docs: add tag A"
 git commit -m "docs: add tag B"
 
-pnpm run pr:since-last
+bun run pr:since-last
 # Output: 2 commits, 2 new pages
 
 # Week 2: More work
 git commit -m "docs: add tutorial"
 
-pnpm run pr:since-last
+bun run pr:since-last
 # Output: 3 commits, 3 new pages
 # Time to create PR!
 ```
@@ -329,12 +329,12 @@ pnpm run pr:since-last
 git pull upstream docs-v2
 
 # Mark their work as baseline
-pnpm run pr:mark-as-merged "Team: Added authentication docs"
+bun run pr:mark-as-merged "Team: Added authentication docs"
 
 # Now your work
 git commit -m "docs: my additions"
 
-pnpm run pr:since-last
+bun run pr:since-last
 # Shows only YOUR work since team PR
 ```
 
@@ -342,13 +342,13 @@ pnpm run pr:since-last
 
 ```bash
 # Start feature
-pnpm run pr:mark-as-merged "Starting advanced guides feature"
+bun run pr:mark-as-merged "Starting advanced guides feature"
 
 # Work over time
 # ... many commits ...
 
 # Check progress periodically
-pnpm run pr:since-last
+bun run pr:since-last
 # Week 1: 5 commits
 # Week 2: 12 commits
 # Week 3: 20 commits - ready for PR!
@@ -380,7 +380,7 @@ This is **intentionally high-level** for quick decision making.
 
 **Solution:**
 ```bash
-pnpm run pr:mark-as-merged "Current baseline"
+bun run pr:mark-as-merged "Current baseline"
 ```
 
 ### Shows Too Many Changes
@@ -391,7 +391,7 @@ pnpm run pr:mark-as-merged "Current baseline"
 ```bash
 # Only do this AFTER a PR is merged by Kamran
 git pull upstream/docs-v2
-pnpm run pr:mark-as-merged "Sync with upstream"
+bun run pr:mark-as-merged "Sync with upstream"
 ```
 
 ### Shows Zero Changes
@@ -402,7 +402,7 @@ pnpm run pr:mark-as-merged "Sync with upstream"
 ```bash
 git add .
 git commit -m "your changes"
-pnpm run pr:since-last
+bun run pr:since-last
 ```
 
 ### Merge Conflicts (Should Be Rare!)
@@ -411,7 +411,7 @@ With the new workflow, conflicts should be minimal. If you still get them:
 
 **Emergency conflict resolution:**
 ```bash
-pnpm run conflicts:resolve
+bun run conflicts:resolve
 ```
 
 **Or manual resolution:**
@@ -420,7 +420,7 @@ pnpm run conflicts:resolve
 git checkout --ours .cursorrules .windsurfrules package.json
 
 # Accept upstream for dependencies
-git checkout --theirs pnpm-lock.yaml
+git checkout --theirs bun.lock
 
 # Manual review for docs files
 git status

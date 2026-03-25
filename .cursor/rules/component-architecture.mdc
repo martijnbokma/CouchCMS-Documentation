@@ -1,6 +1,6 @@
 ---
 description: Documentation for media card component implementation patterns and extensions
-globs: src/components/card-*.astro,src/content/*.ts
+globs: src/components/card-*.astro,src/content/docs/**/*.mdx
 alwaysApply: false
 ---
 

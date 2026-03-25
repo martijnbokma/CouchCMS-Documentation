@@ -10,6 +10,8 @@ import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
+import { loadSkipWrites, SYNC_EXCLUDE_FILENAME } from "./ai-sync-shared.js";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const rootDir = join(__dirname, "..");
@@ -19,6 +21,12 @@ const STANDARDS_FILE = join(rootDir, "DOCS-STANDARDS.md");
 const STYLEGUIDE_FILE = join(rootDir, "STYLEGUIDE.md");
 
 console.log("🔄 Syncing AI configurations from DOCS-STANDARDS.md...\n");
+
+const skip = loadSkipWrites(rootDir);
+let writeCount = 0;
+if (skip.size > 0) {
+    console.log(`📋 ${SYNC_EXCLUDE_FILENAME}: skipWrites = ${[...skip].sort().join(", ")}\n`);
+}
 
 // Helper to ensure directory exists
 function ensureDir(filePath) {
@@ -37,6 +45,24 @@ function writeConfig(path, content, description) {
         console.log(`⚠️  Skipped ${description} (${error.code || "error"})`);
         return false;
     }
+}
+
+/**
+ * @param {string} id
+ * @param {string} path
+ * @param {string} content
+ * @param {string} description
+ */
+function writeConfigSynced(id, path, content, description) {
+    if (skip.has(id)) {
+        console.log(`⏭️  Skipped ${description} (${SYNC_EXCLUDE_FILENAME})`);
+        return false;
+    }
+    const ok = writeConfig(path, content, description);
+    if (ok) {
+        writeCount++;
+    }
+    return ok;
 }
 
 // Read standards
@@ -213,8 +239,10 @@ Before finalizing documentation:
 
 ### Reference Documentation
 - **AI-TOOLKIT.md** - Complete toolkit guide
+- **AGENTS.md** - Repository map and commands
 - **STYLEGUIDE.md** - Full formatting rules
-- **.cursor/README.md** - Detailed documentation
+- **skills/couchcms-documentation/SKILL.md** - Agent Skill (multi-editor); see docs site *Agent Skills*
+- **Unified check** - Run \`bun run ai\` (sync + verify SKILL + validate) before commits
 
 ## Common Patterns
 
@@ -269,24 +297,27 @@ Requires CouchCMS v2.0 or higher.
 `;
 
 // 1. Generate .cursorrules (Cursor AI)
-writeConfig(
+writeConfigSynced(
+    "cursorrules",
     join(rootDir, ".cursorrules"),
     baseRules,
     ".cursorrules (Cursor AI)",
 );
 
 // 2. Generate CLAUDE.md (Claude AI)
-writeConfig(join(rootDir, "CLAUDE.md"), baseRules, "CLAUDE.md (Claude AI)");
+writeConfigSynced("claude", join(rootDir, "CLAUDE.md"), baseRules, "CLAUDE.md (Claude AI)");
 
 // 3. Generate .windsurfrules (Windsurf AI)
-writeConfig(
+writeConfigSynced(
+    "windsurf",
     join(rootDir, ".windsurfrules"),
     baseRules,
     ".windsurfrules (Windsurf AI)",
 );
 
 // 4. Generate GitHub Copilot instructions
-writeConfig(
+writeConfigSynced(
+    "copilot",
     join(rootDir, ".github", "copilot-instructions.md"),
     baseRules,
     ".github/copilot-instructions.md (GitHub Copilot)",
@@ -327,7 +358,8 @@ const vscodeSettings = {
     ],
 };
 
-writeConfig(
+writeConfigSynced(
+    "vscode",
     join(rootDir, ".vscode", "settings.json"),
     JSON.stringify(vscodeSettings, null, 4),
     ".vscode/settings.json (VS Code)",
@@ -340,7 +372,8 @@ const tabnineConfig = {
     instructions: baseRules,
 };
 
-writeConfig(
+writeConfigSynced(
+    "tabnine",
     join(rootDir, ".tabnine", "settings.json"),
     JSON.stringify(tabnineConfig, null, 4),
     ".tabnine/settings.json (Tabnine)",
@@ -357,7 +390,8 @@ const codewhispererConfig = {
     ],
 };
 
-writeConfig(
+writeConfigSynced(
+    "codewhisperer",
     join(rootDir, ".codewhisperer", "settings.json"),
     JSON.stringify(codewhispererConfig, null, 4),
     ".codewhisperer/settings.json (Amazon CodeWhisperer)",
@@ -391,7 +425,8 @@ indent_size = 2
 indent_size = 2
 `;
 
-writeConfig(
+writeConfigSynced(
+    "editorconfig",
     join(rootDir, ".editorconfig"),
     editorconfig,
     ".editorconfig (Universal Editor Config)",
@@ -402,6 +437,10 @@ const aiToolkitIndex = `# AI Configuration Index
 # Auto-generated from DOCS-STANDARDS.md
 
 All AI editor configurations are automatically generated from **DOCS-STANDARDS.md**.
+
+## Optional: skip writes
+
+If \`ai-sync.exclude.json\` exists at the project root, \`bun run sync\` skips generating the entries listed in \`skipWrites\`. Copy \`ai-sync.exclude.example.json\` to \`ai-sync.exclude.json\` and edit, or use \`bun run ai:list -- --remove .tabnine --yes --sync-exclude\` to remove a folder and record the skip in one step.
 
 ## Generated Files
 
@@ -426,11 +465,17 @@ To update all AI configurations:
 bun run sync
 \`\`\`
 
+**Full pipeline** (sync + verify Agent Skill + validate docs):
+\`\`\`bash
+bun run ai
+\`\`\`
+
 ## Manual Tools
 
 These files are maintained manually:
 - \`.cursor/rules/*.mdc\` - Auto-applied formatting rules
 - \`.cursor/prompts/*.md\` - AI assistance prompts
+- \`skills/couchcms-documentation/SKILL.md\` - Agent Skill for [vercel-labs/skills](https://github.com/vercel-labs/skills) (checked by \`bun run ai\`)
 - \`STYLEGUIDE.md\` - Complete style guide
 
 ## Last Sync
@@ -442,16 +487,20 @@ Generated: ${new Date().toISOString()}
 **Never edit generated files directly. Edit DOCS-STANDARDS.md and run \`bun run sync\`.**
 `;
 
-writeConfig(
+writeConfigSynced(
+    "cursorIndex",
     join(rootDir, ".cursor", "AI-CONFIG-INDEX.md"),
     aiToolkitIndex,
     ".cursor/AI-CONFIG-INDEX.md (Configuration Index)",
 );
 
-console.log("\n✨ All AI configurations synced successfully!\n");
+console.log("\n✨ Sync finished.\n");
 console.log("📝 Generated from: DOCS-STANDARDS.md");
-console.log("📁 Files updated: 9 configurations");
+console.log(`📁 Wrote ${writeCount} configuration file(s)`);
+if (skip.size > 0) {
+    console.log(`⏭️  Skipped ${skip.size} target(s) listed in ${SYNC_EXCLUDE_FILENAME}`);
+}
 console.log("🔄 Next steps:");
 console.log("   - Review generated files");
 console.log("   - Commit changes to version control");
-console.log("   - Run `bun run sync` after editing DOCS-STANDARDS.md\n");
+console.log("   - After editing DOCS-STANDARDS.md: `bun run sync` (or full check: `bun run ai`)\n");

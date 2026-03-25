@@ -287,8 +287,8 @@ src/
    - Validate component usage
 
 4. **Build & Deploy**
-   - Run `pnpm build` to compile
-   - Test with `pnpm preview`
+   - Run `bun run build` to compile
+   - Test with `bun run preview`
    - Deploy to GitHub Pages
 
 ## Common Patterns
@@ -386,5 +386,5 @@ When generating documentation:
 
 ---
 
-**This file is the single source of truth for all AI configurations. Changes here automatically propagate to all AI editor configurations via `pnpm run sync`.**
+**This file is the single source of truth for all AI configurations. Changes here automatically propagate to all AI editor configurations via `bun run sync`.** For sync plus Agent Skill verification plus documentation validation, use **`bun run ai`** ([`scripts/ai-tooling.js`](scripts/ai-tooling.js)).
 

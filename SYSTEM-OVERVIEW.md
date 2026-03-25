@@ -15,7 +15,7 @@ Complete visual overview of the documentation AI toolkit architecture.
 │  - Quality requirements                                          │
 └────────────────────────┬────────────────────────────────────────┘
                          │
-                         ├──> pnpm run sync
+                         ├──> bun run sync
                          │
         ┌────────────────┴────────────────┐
         │                                  │
@@ -42,7 +42,7 @@ Complete visual overview of the documentation AI toolkit architecture.
 │  │  Auto-Applied  │  │  Manual Tools  │  │  Validation    │ │
 │  │  Rules         │  │  Prompts       │  │  System        │ │
 │  ├────────────────┤  ├────────────────┤  ├────────────────┤ │
-│  │ markdown.mdc   │  │ convert-to-    │  │ pnpm run       │ │
+│  │ markdown.mdc   │  │ convert-to-    │  │ bun run        │ │
 │  │ content-       │  │ markdown.md    │  │ validate       │ │
 │  │ structure.mdc  │  │ quick-         │  │                │ │
 │  │ component-     │  │ reference.md   │  │ • Frontmatter  │ │
@@ -68,9 +68,9 @@ Complete visual overview of the documentation AI toolkit architecture.
 └──────────────────────────────────────────────────────────────┘
 ```
 
-## Files overwritten by `pnpm run sync`
+## Files overwritten by `bun run sync`
 
-Edit **[DOCS-STANDARDS.md](./DOCS-STANDARDS.md)** and run `pnpm run sync` (or `node scripts/sync-ai-configs.js`). Do not hand-edit these generated files:
+Edit **[DOCS-STANDARDS.md](./DOCS-STANDARDS.md)** and run `bun run sync` (or `node scripts/sync-ai-configs.js`). Do not hand-edit these generated files:
 
 - `.cursorrules`
 - `CLAUDE.md`
@@ -88,7 +88,7 @@ Edit **[DOCS-STANDARDS.md](./DOCS-STANDARDS.md)** and run `pnpm run sync` (or `n
 
 1. SETUP (One Time)
    ┌──────────────┐
-   │ git clone    │──> pnpm install ──> Auto sync ──> All AI Tools
+   │ git clone    │──> bun install ──> Auto sync ──> All AI Tools
    └──────────────┘                                     Configured! ✅
 
 2. UPDATE STANDARDS (As Needed)
@@ -97,9 +97,9 @@ Edit **[DOCS-STANDARDS.md](./DOCS-STANDARDS.md)** and run `pnpm run sync` (or `n
    │ DOCS-STANDARDS.md    │
    └──────┬───────────────┘
           │
-          ├──> pnpm run sync ──> All AI Configs Updated
+          ├──> bun run sync ──> All AI Configs Updated
           │
-          └──> pnpm run validate ──> Documentation Verified
+          └──> bun run validate ──> Documentation Verified
 
 3. CREATE CONTENT (Daily)
    ┌──────────────────────┐
@@ -111,7 +111,7 @@ Edit **[DOCS-STANDARDS.md](./DOCS-STANDARDS.md)** and run `pnpm run sync` (or `n
           │
           ├──> Auto-rules Format
           │
-          └──> pnpm run validate ──> Quality Check
+          └──> bun run validate ──> Quality Check
 
 4. REVIEW & DEPLOY
    ┌──────────────┐
@@ -119,7 +119,7 @@ Edit **[DOCS-STANDARDS.md](./DOCS-STANDARDS.md)** and run `pnpm run sync` (or `n
    │ git commit   │
    └──────┬───────┘
           │
-          └──> CI/CD ──> pnpm run validate ──> Deploy
+          └──> CI/CD ──> bun run validate ──> Deploy
 ```
 
 ## 📊 Component Relationships
@@ -169,26 +169,25 @@ STYLEGUIDE.md (Reference)
 | `convert-to-markdown.md` | Prompt | Content conversion | Active (@-ref) |
 | `markdown-quick-reference.md` | Prompt | Quick syntax | Active (@-ref) |
 | `AI-TOOLKIT.md` | Guide | Main documentation | Read for overview |
-| `QUICKSTART.md` | Guide | 30-second guide | Read for quick start |
-| `README.md` (.cursor) | Guide | Complete toolkit docs | Read for details |
-| `INDEX.md` | Guide | File index | Read for navigation |
+| `archive/cursor-ai-toolkit-legacy/` | Archive | Legacy `.cursor` QUICKSTART, INDEX, long README | Historical reference only |
+| `.cursor/README.md` | Guide | Short hub for rules and prompts | Not the main doc index |
 
 ## 🚀 Command Reference
 
 ```bash
 # SYNC SYSTEM
-pnpm run sync          # Generate all AI configs from DOCS-STANDARDS.md
-pnpm run validate      # Validate documentation compliance
-pnpm run ai:update     # Sync + validate (combined)
+bun run sync          # Generate all AI configs from DOCS-STANDARDS.md
+bun run validate      # Validate documentation compliance
+bun run ai:update     # Sync + validate (combined)
 
 # DOCUMENTATION
-pnpm run dev           # Start dev server
-pnpm run build         # Build production site
-pnpm run preview       # Preview build
+bun run dev           # Start dev server
+bun run build         # Build production site
+bun run preview       # Preview build
 
 # QUALITY
-pnpm run lint:md       # Lint markdown files
-pnpm run lint:md:fix   # Auto-fix markdown issues
+bun run lint:md       # Lint markdown files
+bun run lint:md:fix   # Auto-fix markdown issues
 ```
 
 ## 📈 Quality Flow
@@ -211,7 +210,7 @@ Write Content
     │    └─ Pattern guidance
     │
     └──> Validation (Manual)
-         ├─ pnpm run validate
+         ├─ bun run validate
          ├─ Check frontmatter
          ├─ Verify headings
          ├─ Test links
@@ -227,7 +226,7 @@ Write Content
 ### New Author Setup
 ```
 1. Clone repo
-2. Run pnpm install (auto-syncs AI configs)
+2. Run bun install (auto-syncs AI configs)
 3. Open in Cursor/VS Code/etc.
 4. All AI tools already configured! ✅
 5. Use @.cursor/prompts/convert-to-markdown.md
@@ -239,15 +238,15 @@ Write Content
 1. @convert-to-markdown.md for scaffolding
 2. Write content (auto-rules format)
 3. @markdown-quick-reference.md for edge cases
-4. pnpm run validate before commit
+4. bun run validate before commit
 5. Git commit and push
 ```
 
 ### Standards Update Workflow
 ```
 1. Edit DOCS-STANDARDS.md
-2. pnpm run sync (updates all AI tools)
-3. pnpm run validate (check existing docs)
+2. bun run sync (updates all AI tools)
+3. bun run validate (check existing docs)
 4. Fix any issues if needed
 5. Git commit all changes
 6. All team members get updates on git pull
@@ -261,7 +260,7 @@ Write Content
 - **Manual Prompts**: 2 (convert-to-markdown.md, quick-reference.md)
 - **Validation Checks**: 5+ (frontmatter, headings, code blocks, links, language)
 - **Scripts**: 2 (sync-ai-configs.js, validate-docs.js)
-- **Guide Documents**: 5 (AI-TOOLKIT.md, QUICKSTART.md, README.md, INDEX.md, STYLEGUIDE.md)
+- **Guide Documents**: AI-TOOLKIT.md, AGENTS.md, STYLEGUIDE.md, plus archived legacy `.cursor` navigation under `archive/cursor-ai-toolkit-legacy/`
 
 ## 🎯 Key Benefits Summary
 
@@ -324,8 +323,7 @@ Phase 4: Future Enhancements 🚀
 - 🎯 **Master Config**: [DOCS-STANDARDS.md](DOCS-STANDARDS.md)
 - 📖 **Style Guide**: [STYLEGUIDE.md](STYLEGUIDE.md)
 - 🤖 **AI Toolkit**: [AI-TOOLKIT.md](AI-TOOLKIT.md)
-- ⚡ **Quick Start**: [.cursor/QUICKSTART.md](.cursor/QUICKSTART.md)
-- 📚 **Complete Guide**: [.cursor/README.md](.cursor/README.md)
-- 🗂️ **File Index**: [.cursor/INDEX.md](.cursor/INDEX.md)
+- 📦 **Archived legacy `.cursor` docs**: [archive/cursor-ai-toolkit-legacy/README.md](archive/cursor-ai-toolkit-legacy/README.md)
+- 📂 **`.cursor` hub (rules + prompts)**: [.cursor/README.md](.cursor/README.md)
 - 🔧 **Scripts**: [scripts/README.md](scripts/README.md)
 

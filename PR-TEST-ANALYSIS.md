@@ -186,8 +186,8 @@ Given the scope (79 files, 132 days), consider:
 
 ```bash
 # Validate everything works
-pnpm run validate
-pnpm run build
+bun run validate
+bun run build
 ```
 
 ## 🚀 Next Steps - Your Options
@@ -200,7 +200,7 @@ brew install gh
 gh auth login
 
 # Create PR
-pnpm run pr:create
+bun run pr:create
 
 # Review on GitHub
 # Add any extra context
@@ -251,8 +251,8 @@ Before creating the actual PR:
 - [ ] PR-TEST-OUTPUT.md reviewed
 - [ ] Title looks good
 - [ ] Body covers all changes
-- [ ] `pnpm run validate` passes
-- [ ] `pnpm run build` succeeds
+- [ ] `bun run validate` passes
+- [ ] `bun run build` succeeds
 - [ ] Decide: Automated or Manual PR creation
 - [ ] Ready to create!
 
@@ -261,7 +261,7 @@ Before creating the actual PR:
 Given this is your first PR using the system:
 
 1. **Review** `PR-TEST-OUTPUT.md` thoroughly
-2. **Test locally:** `pnpm run validate && pnpm run build`
+2. **Test locally:** `bun run validate && bun run build`
 3. **Create manually** on GitHub this first time
 4. **Use the test output** as your PR body template
 5. **Add personal context** for Kamran if needed

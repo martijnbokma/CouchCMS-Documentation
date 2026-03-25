@@ -50,18 +50,18 @@ CouchCMS-Documentation/
 
 **Voor:**
 ```bash
-pnpm run pr:prepare       # Removed - te complex
-pnpm run pr:finalize      # Removed - te complex
-pnpm run pr:since-last    # Kept ✅
-pnpm run pr:mark-as-merged # Kept ✅
-pnpm run pr:help          # Updated ✅
+bun run pr:prepare       # Removed - te complex
+bun run pr:finalize      # Removed - te complex
+bun run pr:since-last    # Kept ✅
+bun run pr:mark-as-merged # Kept ✅
+bun run pr:help          # Updated ✅
 ```
 
 **Nu:**
 ```bash
-pnpm run pr:since-last      # Show changes ✅
-pnpm run pr:mark-as-merged  # Mark baseline ✅
-pnpm run pr:help            # Show help ✅
+bun run pr:since-last      # Show changes ✅
+bun run pr:mark-as-merged  # Mark baseline ✅
+bun run pr:help            # Show help ✅
 ```
 
 ## 🎯 Wat Het Systeem Nu Doet
@@ -88,15 +88,15 @@ pnpm run pr:help            # Show help ✅
 ```bash
 # 1. After upstream PR merge
 git pull upstream docs-v2
-pnpm run pr:mark-as-merged "PR description"
+bun run pr:mark-as-merged "PR description"
 
 # 2. Daily work
 git commit -m "docs: updates"
-pnpm run pr:since-last
+bun run pr:since-last
 # Quick check: "5 commits, 2 new pages"
 
 # 3. When ready for PR
-pnpm run pr:since-last
+bun run pr:since-last
 # "15 commits, 5 new pages - time for PR!"
 
 # 4. Create PR manually on GitHub
@@ -125,7 +125,7 @@ git push origin docs-v2
 ## 🧪 Test Results
 
 ```bash
-$ pnpm run pr:help
+$ bun run pr:help
 
 📊 PR Tracker:
   pr:since-last      - Show changes since last upstream PR
@@ -134,7 +134,7 @@ $ pnpm run pr:help
 ```
 
 ```bash
-$ pnpm run pr:since-last
+$ bun run pr:since-last
 
 📊 Changes Since Last PR
 

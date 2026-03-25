@@ -158,8 +158,10 @@ Before finalizing documentation:
 
 ### Reference Documentation
 - **AI-TOOLKIT.md** - Complete toolkit guide
+- **AGENTS.md** - Repository map and commands
 - **STYLEGUIDE.md** - Full formatting rules
-- **.cursor/README.md** - Detailed documentation
+- **skills/couchcms-documentation/SKILL.md** - Agent Skill (multi-editor); see docs site *Agent Skills*
+- **Unified check** - Run `bun run ai` (sync + verify SKILL + validate) before commits
 
 ## Common Patterns
 
@@ -210,4 +212,4 @@ Requires CouchCMS v2.0 or higher.
 
 **For complete rules, see STYLEGUIDE.md**
 **For conversion help, use @.cursor/prompts/convert-to-markdown.md**
-**Generated from DOCS-STANDARDS.md - Last updated: 2025-11-26**
+**Generated from DOCS-STANDARDS.md - Last updated: 2026-03-25**

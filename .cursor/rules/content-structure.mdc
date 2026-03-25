@@ -1,6 +1,6 @@
 ---
 description: Documentation site content hierarchy, section organization, and navigation structure documentation
-globs: src/content/**/*,src/components/layout/*,.astro.config.*
+globs: src/content/**/*,astro.config.mjs
 alwaysApply: false
 ---
 

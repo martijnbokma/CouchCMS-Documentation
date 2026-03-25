@@ -32,20 +32,20 @@
         "postinstall": "node scripts/ai-sync.js"
     },
     "dependencies": {
-        "@astro-community/astro-embed-youtube": "^0.5.9",
-        "@astrojs/starlight": "^0.36.3",
-        "astro": "^5.16.1",
+        "@astro-community/astro-embed-youtube": "^0.5.10",
+        "@astrojs/starlight": "^0.38.2",
+        "astro": "^6.0.8",
         "sharp": "^0.34.5",
-        "starlight-links-validator": "^0.19.1",
-        "typescript": "^5.9.3"
+        "starlight-links-validator": "^0.20.1",
+        "typescript": "^6.0.2"
     },
     "devDependencies": {
-        "@astrojs/check": "^0.9.6",
+        "@astrojs/check": "^0.9.8",
         "@inquirer/prompts": "^8.3.2",
-        "markdownlint": "^0.39.0",
-        "markdownlint-cli": "^0.45.0",
-        "markdownlint-cli2": "^0.18.1",
-        "prettier": "^3.6.2",
+        "markdownlint": "^0.40.0",
+        "markdownlint-cli": "^0.48.0",
+        "markdownlint-cli2": "^0.22.0",
+        "prettier": "^3.8.1",
         "prettier-plugin-astro": "^0.14.1"
     }
 }

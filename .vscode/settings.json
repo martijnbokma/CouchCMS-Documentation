@@ -29,6 +29,5 @@
         "Astro",
         "mdx",
         "frontmatter"
-    ],
-    "specstory.cloudSync.enabled": "never"
+    ]
 }

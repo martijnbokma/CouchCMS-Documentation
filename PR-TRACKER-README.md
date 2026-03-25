@@ -20,14 +20,14 @@ gh auth login               # Authenticate
 
 # Setup
 git remote add upstream https://github.com/CouchCMS/Documentation.git
-pnpm run pr:mark-as-merged "Initial baseline"
+bun run pr:mark-as-merged "Initial baseline"
 
 # Daily usage
-pnpm run pr:since-last      # Check progress
-pnpm run pr:create          # Auto-create PR (or manual via GitHub)
+bun run pr:since-last      # Check progress
+bun run pr:create          # Auto-create PR (or manual via GitHub)
 
 # After PR merge
-pnpm run pr:mark-as-merged "Your PR title"
+bun run pr:mark-as-merged "Your PR title"
 ```
 
 ## 📚 Documentation
@@ -83,14 +83,14 @@ pnpm run pr:mark-as-merged "Your PR title"
 
 ```bash
 # Core commands
-pnpm run pr:since-last       # Show changes since last PR
-pnpm run pr:mark-as-merged   # Mark current state as baseline
-pnpm run pr:create           # Auto-create GitHub PR
-pnpm run pr:help             # Show help
+bun run pr:since-last       # Show changes since last PR
+bun run pr:mark-as-merged   # Mark current state as baseline
+bun run pr:create           # Auto-create GitHub PR
+bun run pr:help             # Show help
 
 # Related commands
-pnpm run validate            # Validate documentation
-pnpm run build               # Build the site
+bun run validate            # Validate documentation
+bun run build               # Build the site
 ```
 
 ## 🌟 Key Features
@@ -138,8 +138,8 @@ Total time: ~15 minutes per PR
 
 **With PR Tracker:**
 ```
-1. pnpm run pr:since-last (automatic summary)
-2. pnpm run pr:create (everything automated)
+1. bun run pr:since-last (automatic summary)
+2. bun run pr:create (everything automated)
 Total time: ~30 seconds per PR
 ```
 
@@ -151,7 +151,7 @@ Total time: ~30 seconds per PR
 
 ## 🆘 Need Help?
 
-1. **Quick questions:** Run `pnpm run pr:help`
+1. **Quick questions:** Run `bun run pr:help`
 2. **Setup issues:** Read `QUICK-START.md`
 3. **Git problems:** Check `GIT-WORKFLOW.md`
 4. **Automation:** See `PR-CREATE-SETUP.md`
@@ -169,18 +169,18 @@ Total time: ~30 seconds per PR
 
 **New user?**
 1. Read `QUICK-START.md` (5 minutes)
-2. Try `pnpm run pr:since-last`
-3. When ready, try `pnpm run pr:create`
+2. Try `bun run pr:since-last`
+3. When ready, try `bun run pr:create`
 
 **Want automation?**
 1. Read `PR-CREATE-SETUP.md`
 2. Install GitHub CLI
 3. Authenticate
-4. Use `pnpm run pr:create`
+4. Use `bun run pr:create`
 
 **Just need tracking?**
 1. Read `PR-TRACKER.md` (sections 1-3)
-2. Use `pnpm run pr:since-last`
+2. Use `bun run pr:since-last`
 3. Create PRs manually on GitHub
 
 ---

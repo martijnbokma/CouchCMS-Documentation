@@ -3,6 +3,10 @@
 
 All AI editor configurations are automatically generated from **DOCS-STANDARDS.md**.
 
+## Optional: skip writes
+
+If `ai-sync.exclude.json` exists at the project root, `bun run sync` skips generating the entries listed in `skipWrites`. Copy `ai-sync.exclude.example.json` to `ai-sync.exclude.json` and edit, or use `bun run ai:list -- --remove .tabnine --yes --sync-exclude` to remove a folder and record the skip in one step.
+
 ## Generated Files
 
 ### AI Assistants
@@ -26,16 +30,22 @@ To update all AI configurations:
 bun run sync
 ```
 
+**Full pipeline** (sync + verify Agent Skill + validate docs):
+```bash
+bun run ai
+```
+
 ## Manual Tools
 
 These files are maintained manually:
 - `.cursor/rules/*.mdc` - Auto-applied formatting rules
 - `.cursor/prompts/*.md` - AI assistance prompts
+- `skills/couchcms-documentation/SKILL.md` - Agent Skill for [vercel-labs/skills](https://github.com/vercel-labs/skills) (checked by `bun run ai`)
 - `STYLEGUIDE.md` - Complete style guide
 
 ## Last Sync
 
-Generated: 2025-11-26T17:19:28.784Z
+Generated: 2026-03-25T17:20:24.530Z
 
 ---
 

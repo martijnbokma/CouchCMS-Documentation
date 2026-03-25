@@ -10,14 +10,14 @@ When you run `git merge upstream/docs-v2`, you often get conflicts in these file
 2. **`.windsurfrules`** - AI configuration
 3. **`.giga/rules/`** - AI configuration files
 4. **`package.json`** - Dependencies
-5. **`pnpm-lock.yaml`** - Lock file
+5. **`bun.lock`** - Lock file
 6. **Extended entities docs** - Documentation files
 
 ## 🚀 Quick Resolution Command
 
 ```bash
 # Run this when you get conflicts
-pnpm run conflicts:resolve
+bun run conflicts:resolve
 ```
 
 This script will:
@@ -44,9 +44,9 @@ git add .
 **Dependencies** (Accept Theirs):
 ```bash
 git checkout --theirs package.json
-git checkout --theirs pnpm-lock.yaml
-git add package.json pnpm-lock.yaml
-pnpm install
+git checkout --theirs bun.lock
+git add package.json bun.lock
+bun install
 ```
 
 **Reason:** Upstream has newer/tested versions - safer to use those.
@@ -86,7 +86,7 @@ Upstream changes (usually older content)
 ### Step 1: Run Conflict Resolver
 
 ```bash
-pnpm run conflicts:resolve
+bun run conflicts:resolve
 ```
 
 Output shows:
@@ -102,7 +102,7 @@ Output shows:
 # Usually:
 git checkout --ours .cursorrules
 git checkout --ours .windsurfrules
-git checkout --theirs pnpm-lock.yaml
+git checkout --theirs bun.lock
 git add .
 ```
 
@@ -130,10 +130,10 @@ git commit -m "Merge upstream/docs-v2, resolved conflicts"
 git status
 # Should be clean
 
-pnpm install
+bun install
 # Reinstall dependencies
 
-pnpm run build
+bun run build
 # Verify everything works
 ```
 
@@ -152,7 +152,7 @@ You and upstream both modify:
 
 You update packages, upstream updates packages:
 - Both update `package.json`
-- Both update `pnpm-lock.yaml`
+- Both update `bun.lock`
 
 **Solution:** Accept UPSTREAM version, then reinstall.
 
@@ -225,20 +225,20 @@ git add .
 git commit -m "Merge upstream/docs-v2"
 ```
 
-### "pnpm install fails"
+### "bun install fails"
 
 **Problem:** Lock file issues
 **Solution:**
 
 ```bash
 # Remove lock file
-rm pnpm-lock.yaml
+rm bun.lock
 
 # Reinstall
-pnpm install
+bun install
 
 # Add new lock file
-git add pnpm-lock.yaml
+git add bun.lock
 git commit --amend --no-edit
 ```
 
@@ -248,11 +248,11 @@ git commit --amend --no-edit
 
 ```bash
 # 1. Analyze
-pnpm run conflicts:resolve
+bun run conflicts:resolve
 
 # 2. Auto-resolve (from script output)
 git checkout --ours .cursorrules .windsurfrules
-git checkout --theirs pnpm-lock.yaml
+git checkout --theirs bun.lock
 git add .
 
 # 3. Docs (keep yours - better formatting)
@@ -263,10 +263,10 @@ git add .
 git commit -m "Merge upstream/docs-v2, resolved conflicts"
 
 # 5. Reinstall
-pnpm install
+bun install
 
 # 6. Verify
-pnpm run build
+bun run build
 ```
 
 ---

@@ -27,6 +27,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+bun-debug.log*
 
 # Temporary files
 *.tmp
@@ -39,3 +40,9 @@ PR-TEST-OUTPUT.md
 # Local Cursor / agent artifacts (do not commit)
 .specstory/
 .cursor/hooks/
+
+# Agent Skills CLI (bunx skills add) — local cache or project scope
+.skills/
+
+# Per-agent skill installs in this repo (symlinks/copies; do not commit)
+.agents/skills/

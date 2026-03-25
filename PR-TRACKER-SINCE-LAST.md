@@ -17,17 +17,17 @@ Dit helpt je om:
 
 ```bash
 # Mark huidige staat als "laatste PR"
-pnpm run pr:mark-as-merged "Description of the PR that was just merged"
+bun run pr:mark-as-merged "Description of the PR that was just merged"
 
 # Voorbeeld:
-pnpm run pr:mark-as-merged "Added dropdownfolders tag documentation"
+bun run pr:mark-as-merged "Added dropdownfolders tag documentation"
 ```
 
 ### Dagelijks Gebruik
 
 ```bash
 # Check wat er is veranderd sinds laatste PR
-pnpm run pr:since-last
+bun run pr:since-last
 ```
 
 ## 📊 Wat Krijg Je Te Zien?
@@ -35,7 +35,7 @@ pnpm run pr:since-last
 ### Scenario 1: Net Na PR Merge (Niets Nieuws)
 
 ```bash
-$ pnpm run pr:since-last
+$ bun run pr:since-last
 
 📊 Changes Since Last PR
 
@@ -53,7 +53,7 @@ Current branch: docs-v2
 ### Scenario 2: Na Wat Werk (Wijzigingen Gedetecteerd)
 
 ```bash
-$ pnpm run pr:since-last
+$ bun run pr:since-last
 
 📊 Changes Since Last PR
 
@@ -93,7 +93,7 @@ Current branch: docs-v2
 
 💡 Next steps:
   📋 Consider creating a new PR:
-     pnpm run pr:prepare
+     bun run pr:prepare
 ```
 
 ## 🔄 Complete Workflow
@@ -107,10 +107,10 @@ Zodra jouw PR is gemerged op [CouchCMS/Documentation](https://github.com/CouchCM
 git pull upstream docs-v2
 
 # Mark als laatste PR
-pnpm run pr:mark-as-merged "Description from your GitHub PR"
+bun run pr:mark-as-merged "Description from your GitHub PR"
 
 # Voorbeeld:
-pnpm run pr:mark-as-merged "Added comprehensive tag reference for core tags"
+bun run pr:mark-as-merged "Added comprehensive tag reference for core tags"
 ```
 
 ### 2. Tijdens Werk
@@ -119,7 +119,7 @@ Terwijl je werkt aan nieuwe features/docs:
 
 ```bash
 # Regelmatig checken wat je hebt gedaan
-pnpm run pr:since-last
+bun run pr:since-last
 
 # Output toont:
 # - Aantal commits
@@ -134,14 +134,14 @@ Als je voldoende werk hebt gedaan:
 
 ```bash
 # Check status
-pnpm run pr:since-last
+bun run pr:since-last
 # Zie: 15 commits, 5 nieuwe pagina's, 3 dagen werk
 
 # Genereer PR documentation
-pnpm run pr:prepare
+bun run pr:prepare
 
 # Edit draft, finalize
-pnpm run pr:finalize
+bun run pr:finalize
 
 # Push & create PR on GitHub
 git push origin docs-v2
@@ -154,7 +154,7 @@ git push origin docs-v2
 git pull upstream docs-v2
 
 # Mark nieuwe baseline
-pnpm run pr:mark-as-merged "Your new PR description"
+bun run pr:mark-as-merged "Your new PR description"
 
 # Continue work...
 ```
@@ -165,17 +165,17 @@ pnpm run pr:mark-as-merged "Your new PR description"
 
 ```bash
 # ✅ GOED: Beschrijvend
-pnpm run pr:mark-as-merged "Added 5 new core tag references with examples"
+bun run pr:mark-as-merged "Added 5 new core tag references with examples"
 
 # ❌ NIET GOED: Vaag
-pnpm run pr:mark-as-merged "updates"
+bun run pr:mark-as-merged "updates"
 ```
 
 ### Tip 2: Regelmatig Checken
 
 ```bash
 # Voeg toe aan je routine
-pnpm run pr:since-last
+bun run pr:since-last
 
 # Bij 10+ commits: overweeg PR
 # Bij 3+ dagen werk: overweeg PR
@@ -186,11 +186,11 @@ pnpm run pr:since-last
 
 ```bash
 # Workflow:
-pnpm run pr:since-last       # Check je werk
-pnpm run pr:prepare          # Genereer draft
-pnpm run pr:finalize         # Valideer
+bun run pr:since-last       # Check je werk
+bun run pr:prepare          # Genereer draft
+bun run pr:finalize         # Valideer
 # Create PR on GitHub
-pnpm run pr:mark-as-merged   # Track voor volgende keer
+bun run pr:mark-as-merged   # Track voor volgende keer
 ```
 
 ### Tip 4: Team Sync
@@ -202,7 +202,7 @@ Als je in een team werkt:
 git pull upstream docs-v2
 
 # Mark de merged state
-pnpm run pr:mark-as-merged "Team PR: Q4 documentation updates"
+bun run pr:mark-as-merged "Team PR: Q4 documentation updates"
 
 # Nu track je alleen JOUw work sinds team PR
 ```
@@ -236,7 +236,7 @@ git commit -m "docs: add tag B"
 git commit -m "docs: update concepts"
 
 # Check status
-pnpm run pr:since-last
+bun run pr:since-last
 # Output: 3 commits, 2 nieuwe pagina's
 
 # Week 2: Meer werk
@@ -244,15 +244,15 @@ git commit -m "docs: add tutorial"
 git commit -m "fix: broken links"
 
 # Check again
-pnpm run pr:since-last
+bun run pr:since-last
 # Output: 5 commits, 3 nieuwe pagina's
 # Tijd voor PR!
 
 # Create PR
-pnpm run pr:prepare
+bun run pr:prepare
 
 # After merge
-pnpm run pr:mark-as-merged "Added tags A, B and new tutorial"
+bun run pr:mark-as-merged "Added tags A, B and new tutorial"
 ```
 
 ### Use Case 2: Contributing to Upstream
@@ -262,17 +262,17 @@ pnpm run pr:mark-as-merged "Added tags A, B and new tutorial"
 git pull upstream docs-v2
 
 # Mark current upstream state
-pnpm run pr:mark-as-merged "Upstream: Latest merged PRs"
+bun run pr:mark-as-merged "Upstream: Latest merged PRs"
 
 # Your work
 git commit -m "docs: my contribution"
 
 # Check what you're adding to upstream
-pnpm run pr:since-last
+bun run pr:since-last
 # Shows only YOUR commits since upstream sync
 
 # Create PR for upstream
-pnpm run pr:prepare
+bun run pr:prepare
 # Shows only YOUR changes
 ```
 
@@ -283,13 +283,13 @@ pnpm run pr:prepare
 git checkout -b feature/advanced-guides
 
 # Mark starting point
-pnpm run pr:mark-as-merged "Starting advanced guides feature"
+bun run pr:mark-as-merged "Starting advanced guides feature"
 
 # Work over weeks
 # ... many commits ...
 
 # Periodically check progress
-pnpm run pr:since-last
+bun run pr:since-last
 # Week 1: 5 commits, 2 pages
 # Week 2: 12 commits, 5 pages
 # Week 3: 20 commits, 8 pages - ready for PR!
@@ -312,7 +312,7 @@ pnpm run pr:since-last
 - ❌ Node modules or build artifacts
 - ❌ Individual code examples
 
-This is **intentionally high-level**. For detailed PR descriptions, use `pnpm run pr:prepare`.
+This is **intentionally high-level**. For detailed PR descriptions, use `bun run pr:prepare`.
 
 ## 🆚 Verschil Met pr:prepare
 
@@ -329,15 +329,15 @@ This is **intentionally high-level**. For detailed PR descriptions, use `pnpm ru
 
 ```bash
 # Daily: Quick check
-pnpm run pr:since-last
+bun run pr:since-last
 # "15 commits, time for PR"
 
 # PR Time: Detailed documentation
-pnpm run pr:prepare
+bun run pr:prepare
 # Edit DRAFT-PR.md with descriptions
 
 # After PR Merge
-pnpm run pr:mark-as-merged "PR title"
+bun run pr:mark-as-merged "PR title"
 
 # Repeat...
 ```
@@ -350,7 +350,7 @@ pnpm run pr:mark-as-merged "PR title"
 
 **Solution:**
 ```bash
-pnpm run pr:mark-as-merged "Initial baseline"
+bun run pr:mark-as-merged "Initial baseline"
 ```
 
 ### Shows Too Many Changes
@@ -360,7 +360,7 @@ pnpm run pr:mark-as-merged "Initial baseline"
 **Solution:** Mark een nieuwere state:
 ```bash
 git pull upstream docs-v2
-pnpm run pr:mark-as-merged "Sync with upstream"
+bun run pr:mark-as-merged "Sync with upstream"
 ```
 
 ### Shows Zero Changes (But You Have Work)
@@ -371,7 +371,7 @@ pnpm run pr:mark-as-merged "Sync with upstream"
 ```bash
 git add .
 git commit -m "your changes"
-pnpm run pr:since-last
+bun run pr:since-last
 ```
 
 ### Wrong Last PR Date
@@ -380,20 +380,20 @@ pnpm run pr:since-last
 
 **Solution:** Mark opnieuw:
 ```bash
-pnpm run pr:mark-as-merged "Corrected: actual last PR"
+bun run pr:mark-as-merged "Corrected: actual last PR"
 ```
 
 ## 🎊 Commands Overview
 
 ```bash
 # Mark current state as last PR
-pnpm run pr:mark-as-merged ["Optional description"]
+bun run pr:mark-as-merged ["Optional description"]
 
 # Show changes since last PR
-pnpm run pr:since-last
+bun run pr:since-last
 
 # Show all PR commands
-pnpm run pr:help
+bun run pr:help
 ```
 
 ## 📚 Related Documentation

@@ -79,10 +79,10 @@ After:  "Complete guide to creating date-based archives with
 
 **Commands:**
 ```bash
-pnpm run pr:since-last       # Check progress
-pnpm run pr:mark-as-merged   # Mark baseline
-pnpm run pr:test             # Test PR creation
-pnpm run pr:create           # Auto-create PR
+bun run pr:since-last       # Check progress
+bun run pr:mark-as-merged   # Mark baseline
+bun run pr:test             # Test PR creation
+bun run pr:create           # Auto-create PR
 ```
 
 **Benefits:**
@@ -624,7 +624,7 @@ Everything is analyzed and ready. Your PR would include:
 
 ```bash
 # Option 1: Automated
-pnpm run pr:create
+bun run pr:create
 
 # Option 2: Manual (use PR-SUMMARY.md as template)
 git push origin docs-v2
