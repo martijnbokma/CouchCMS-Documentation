@@ -53,7 +53,7 @@ This approach was chosen over:
 
 `pr-create.js`, `pr-guided.js`, `pr-since-last.js`, `pr-mark-merged.js`
 
-### Final scripts directory (14 files, down from 15)
+### Final scripts directory (14 files — 15 existing, minus 2 removed, plus 1 added)
 
 ```
 scripts/
@@ -96,10 +96,10 @@ Checkbox list of all AI tool directories detected at the repo root. Each item sh
 
 On confirm:
 1. Selected directories are deleted from disk (`rmSync`).
-2. Each deleted directory is added to `ai-sync.exclude.json` via `addSkipWrites()` (imported from `ai-sync-shared.js`).
+2. **Only** directories that have a corresponding entry in `DIR_TO_SYNC_SKIP_ID` (currently `.tabnine` and `.codewhisperer`) are passed to `addSkipWrites()`. All other directories are silently skipped for the exclude step — `addSkipWrites()` validates against an allow-list and would no-op for unknown ids.
 3. A summary is printed: `✅ Removed: .tabnine, .codewhisperer`.
 
-This prevents `bun run sync` from recreating the removed directories.
+This prevents `bun run sync` from recreating the removed sync-generated directories.
 
 ### Manage skills
 
@@ -140,7 +140,10 @@ ai-manage.js reads ENTRIES from ai-inventory.js logic
         ↓
 Removes selected dirs from disk (rmSync)
         ↓
-Calls addSkipWrites() → updates ai-sync.exclude.json
+For each removed dir, look up id in DIR_TO_SYNC_SKIP_ID
+        ↓
+Pass matched ids to addSkipWrites() → updates ai-sync.exclude.json
+(dirs with no DIR_TO_SYNC_SKIP_ID entry are skipped for this step)
         ↓
 Prints summary: "✅ Removed: .tabnine, .codewhisperer"
 ```
@@ -153,6 +156,12 @@ Prints summary: "✅ Removed: .tabnine, .codewhisperer"
 ```json
 "ai:manage": "node scripts/ai-manage.js"
 ```
+
+Note: `pr:help` contains an inline `echo` string that describes `pr:test` — update its text to match the renamed script description if needed (cosmetic only, no path reference).
+
+**Internal path references to update inside renamed scripts:**
+- `ai-check.js` (was `ai-tooling.js`) calls `scripts/sync-ai-configs.js` and `scripts/validate-docs.js` internally via `execFileSync` → update to `scripts/ai-sync.js` and `scripts/docs-validate.js`.
+- `ai-inventory.js` (was `ai-tooling-inventory.js`) prints its own filename in help text → update to `ai-inventory.js` and `bun run ai:list`.
 
 **Update references** (renamed scripts):
 ```json
@@ -183,10 +192,20 @@ Prints summary: "✅ Removed: .tabnine, .codewhisperer"
 
 ---
 
+## Non-interactive / CI behaviour
+
+`ai-manage.js` must guard against non-TTY contexts (e.g. CI). If `process.stdin.isTTY` is falsy, print a brief usage summary and exit 0 without launching the interactive menu. All other scripts (`ai-check.js`, `docs-validate.js`, etc.) remain usable non-interactively as before.
+
+## Error handling
+
+When `ai-manage.js` calls a child script via `execFileSync` and that script exits non-zero, catch the error, print the child's exit code and stderr, then return to the main menu rather than propagating the failure and exiting. This keeps the session alive for follow-up actions.
+
 ## Success criteria
 
-- `bun run ai:manage` launches the interactive menu
-- Selecting and confirming agent directories removes them from disk and updates `ai-sync.exclude.json`
+- `bun run ai:manage` launches the interactive menu in a TTY context
+- Selecting and confirming sync-generated agent directories removes them from disk and updates `ai-sync.exclude.json`; non-sync directories are removed from disk only
 - `bun run sync` does not recreate excluded directories
 - All existing `bun run ai:*`, `bun run pr:*`, and `bun run validate` commands still work (updated paths in `package.json`)
-- No regressions in `bun run ai` (full AI check pipeline)
+- No regressions in `bun run ai` (full AI check pipeline, including internal path references inside `ai-check.js`)
+- "Install skill" in the Manage skills menu invokes `bun x skills add`; "Remove skill" invokes `bun x skills remove`
+- Running `bun run ai:manage` in a non-TTY context exits 0 with a usage summary
