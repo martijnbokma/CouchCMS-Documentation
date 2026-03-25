@@ -67,6 +67,7 @@ CouchCMS-Documentation/
 | **Find a specific tool** | [INDEX.md](.cursor/INDEX.md) |
 | **Reference formatting rules** | [STYLEGUIDE.md](STYLEGUIDE.md) |
 | **Convert content** | [convert-to-markdown.md](.cursor/prompts/convert-to-markdown.md) |
+| **Promote `.inbox/` drafts to MDX** | [INBOX-WORKFLOW.md](INBOX-WORKFLOW.md) |
 | **Look up syntax** | [markdown-quick-reference.md](.cursor/prompts/markdown-quick-reference.md) |
 
 ## 🤖 How It Works

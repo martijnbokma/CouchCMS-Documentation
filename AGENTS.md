@@ -21,6 +21,7 @@ Use this file as the **primary orientation** for AI coding agents working in thi
 | `.cursor/rules/` | Cursor rules (`markdown.mdc`, `content-structure.mdc`, `component-architecture.mdc`) |
 | `.cursor/prompts/` | Reusable prompts (conversion, quick reference) |
 | `STYLEGUIDE.md` | Full author-facing style guide (also updated on `pnpm build` from rules) |
+| `.inbox/` | **Unpublished** raw drafts only; promotion pipeline in [INBOX-WORKFLOW.md](./INBOX-WORKFLOW.md) |
 
 ## Generated or synced files (do not hand-edit without process)
 

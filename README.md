@@ -51,6 +51,7 @@ The documentation is built with [Astro](https://astro.build/) + [Starlight](http
 ## Working with Documentation
 
 - All docs are written in MDX (`.mdx` files in `src/content/docs/`).
+- Raw drafts may start in **`.inbox/`**; use **[INBOX-WORKFLOW.md](./INBOX-WORKFLOW.md)** to convert them with minimal edits to the author’s originals.
 - **Follow the [CouchCMS Documentation Style Guide](./STYLEGUIDE.md) for all formatting, code, and content rules.**
 - Use clear, concise language and proper heading hierarchy.
 - Add code examples and screenshots where relevant.
