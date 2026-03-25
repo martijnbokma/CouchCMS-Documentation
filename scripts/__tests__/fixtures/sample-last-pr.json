@@ -1,0 +1,9 @@
+{
+    "date": "2025-01-15T10:30:00.000Z",
+    "branch": "feature/test-branch",
+    "description": "Sample PR for testing purposes",
+    "commit": {
+        "hash": "abc123def456789012345678901234567890abcd",
+        "message": "feat: add new feature for documentation"
+    }
+}

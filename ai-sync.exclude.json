@@ -1,0 +1,6 @@
+{
+    "skipWrites": [
+        "codewhisperer",
+        "tabnine"
+    ]
+}

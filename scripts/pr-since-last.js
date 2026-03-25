@@ -6,152 +6,26 @@
  * Usage: bun run pr:since-last
  */
 
-import { execSync } from "child_process";
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import { writeFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import {
+    colors,
+    log,
+    getCurrentBranch,
+    getLastPRInfo,
+    getCommitsSince,
+    getChangedFilesSince,
+    categorizeFiles,
+} from "./lib/pr-utils.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const rootDir = join(__dirname, "..");
 const trackingFile = join(rootDir, ".last-pr.json");
 
-// Colors for terminal output
-const colors = {
-    reset: "\x1b[0m",
-    bright: "\x1b[1m",
-    green: "\x1b[32m",
-    yellow: "\x1b[33m",
-    red: "\x1b[31m",
-    blue: "\x1b[34m",
-    cyan: "\x1b[36m",
-    magenta: "\x1b[35m",
-};
-
-function log(message, color = "reset") {
-    console.log(`${colors[color]}${message}${colors.reset}`);
-}
-
-function getLastPRInfo() {
-    if (!existsSync(trackingFile)) {
-        return null;
-    }
-
-    try {
-        const data = readFileSync(trackingFile, "utf-8");
-        return JSON.parse(data);
-    } catch {
-        return null;
-    }
-}
-
 function saveLastPRInfo(info) {
     writeFileSync(trackingFile, JSON.stringify(info, null, 2), "utf-8");
-}
-
-function getCurrentBranch() {
-    try {
-        return execSync("git rev-parse --abbrev-ref HEAD", {
-            encoding: "utf-8",
-        }).trim();
-    } catch {
-        return "unknown";
-    }
-}
-
-function getCommitsSince(since) {
-    try {
-        const output = execSync(
-            `git log --since="${since}" --oneline --no-merges`,
-            {
-                encoding: "utf-8",
-                cwd: rootDir,
-            },
-        );
-        return output
-            .trim()
-            .split("\n")
-            .filter((line) => line)
-            .map((line) => {
-                const [hash, ...messageParts] = line.split(" ");
-                return { hash, message: messageParts.join(" ") };
-            });
-    } catch {
-        return [];
-    }
-}
-
-function getChangedFilesSince(since) {
-    try {
-        const sinceCommit = execSync(
-            `git rev-list -1 --before="${since}" HEAD`,
-            {
-                encoding: "utf-8",
-                cwd: rootDir,
-            },
-        ).trim();
-
-        if (!sinceCommit) {
-            return [];
-        }
-
-        const output = execSync(
-            `git diff --name-status ${sinceCommit}...HEAD`,
-            {
-                encoding: "utf-8",
-                cwd: rootDir,
-            },
-        );
-
-        return output
-            .trim()
-            .split("\n")
-            .filter((line) => line)
-            .map((line) => {
-                const [status, ...pathParts] = line.split("\t");
-                const path = pathParts.join("\t");
-                return { status, path };
-            });
-    } catch (error) {
-        log(`⚠️  Could not get file changes: ${error.message}`, "yellow");
-        return [];
-    }
-}
-
-function categorizeFiles(files) {
-    const categories = {
-        newPages: [],
-        updatedPages: [],
-        deletedPages: [],
-        otherChanges: [],
-    };
-
-    files.forEach(({ status, path }) => {
-        if (
-            path.includes("node_modules/") ||
-            path.includes("dist/") ||
-            path.includes(".next/")
-        ) {
-            return;
-        }
-
-        const isDocPage =
-            path.includes("src/content/docs/") && path.endsWith(".mdx");
-
-        if (isDocPage) {
-            if (status === "A") {
-                categories.newPages.push(path);
-            } else if (status === "M") {
-                categories.updatedPages.push(path);
-            } else if (status === "D") {
-                categories.deletedPages.push(path);
-            }
-        } else {
-            categories.otherChanges.push({ status, path });
-        }
-    });
-
-    return categories;
 }
 
 function categorizeCommits(commits) {

@@ -4,12 +4,12 @@
     "couchcms-documentation": {
       "source": "/Users/macgyver/Dropbox/Code/CouchCMS-Documentation",
       "sourceType": "local",
-      "computedHash": "120f00d144cfb6a0a24ad874d4791a1569606100cb93280c79e1b9e52eebb80f"
+      "computedHash": "4c39b206ab103b2dc201171d1124eafaa71d5c4011fa6e7a603de3b990759e33"
     },
     "find-skills": {
-      "source": "vercel-labs/skills",
-      "sourceType": "github",
-      "computedHash": "d31e234f0c90694a670222cdd1dafa853e051d7066beda389f1097c22dadd461"
+      "source": "/Users/macgyver/Dropbox/Code/CouchCMS-Documentation",
+      "sourceType": "local",
+      "computedHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   }
 }

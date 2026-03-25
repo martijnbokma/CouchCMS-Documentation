@@ -67,13 +67,13 @@ sidebar:
 ### Code Blocks
 
 Always include descriptive titles:
-````markdown
+```markdown
 ```php title="config.php"
 <?php
 // Code here
 ?>
 ```
-````
+```
 
 ### Components
 

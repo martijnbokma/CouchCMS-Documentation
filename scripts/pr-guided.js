@@ -7,31 +7,8 @@
  */
 
 import { execSync } from "child_process";
-import { readFileSync, existsSync } from "fs";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
 import * as readline from "readline";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const rootDir = join(__dirname, "..");
-const trackingFile = join(rootDir, ".last-pr.json");
-
-// Colors for terminal output
-const colors = {
-    reset: "\x1b[0m",
-    bright: "\x1b[1m",
-    green: "\x1b[32m",
-    yellow: "\x1b[33m",
-    red: "\x1b[31m",
-    blue: "\x1b[34m",
-    cyan: "\x1b[36m",
-    magenta: "\x1b[35m",
-};
-
-function log(message, color = "reset") {
-    console.log(`${colors[color]}${message}${colors.reset}`);
-}
+import { colors, log, getCurrentBranch, getLastPRInfo } from "./lib/pr-utils.js";
 
 function ask(question) {
     const rl = readline.createInterface({
@@ -45,16 +22,6 @@ function ask(question) {
             resolve(answer.trim());
         });
     });
-}
-
-function getCurrentBranch() {
-    try {
-        return execSync("git rev-parse --abbrev-ref HEAD", {
-            encoding: "utf-8",
-        }).trim();
-    } catch {
-        return "unknown";
-    }
 }
 
 function hasUncommittedChanges() {
@@ -101,17 +68,6 @@ function checkGitHubCLI() {
         return true;
     } catch {
         return false;
-    }
-}
-
-function getLastPRInfo() {
-    if (!existsSync(trackingFile)) {
-        return null;
-    }
-    try {
-        return JSON.parse(readFileSync(trackingFile, "utf-8"));
-    } catch {
-        return null;
     }
 }
 

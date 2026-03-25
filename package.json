@@ -29,7 +29,10 @@
         "pr:guided": "node scripts/pr-guided.js",
         "conflicts:resolve": "node scripts/git-conflicts.js",
         "pr:help": "echo '\n📊 PR Tracker:\n  pr:since-last      - Show changes since last upstream PR\n  pr:mark-as-merged  - Mark current upstream state\n  pr:test            - Dry-run PR creation\n  pr:create          - Actually create GitHub PR\n  pr:guided          - Step-by-step guided PR creation\n  conflicts:resolve  - Help resolve merge conflicts\n  pr:help            - Show this help\n'",
-        "postinstall": "node scripts/ai-sync.js"
+        "postinstall": "node scripts/ai-sync.js",
+        "test": "node --test scripts/__tests__/**/*.test.js",
+        "test:watch": "node --test --watch scripts/__tests__/**/*.test.js",
+        "test:coverage": "node --test --experimental-test-coverage scripts/__tests__/**/*.test.js"
     },
     "dependencies": {
         "@astro-community/astro-embed-youtube": "^0.5.10",
