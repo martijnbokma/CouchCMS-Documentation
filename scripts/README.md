@@ -11,14 +11,24 @@ All AI editor configurations are generated from **DOCS-STANDARDS.md**.
 ```
 DOCS-STANDARDS.md (Single Source)
         ↓
-    pnpm run sync
+    bun run sync
         ↓
 All AI Configurations Updated
 ```
 
+### Optional: `ai-sync.exclude.json`
+
+To **stop** `bun run sync` from writing specific outputs (for example after you removed **`.tabnine`** or **`.codewhisperer`** and do not want them back), add a file at the repository root:
+
+- **Copy** [`ai-sync.exclude.example.json`](../ai-sync.exclude.example.json) to **`ai-sync.exclude.json`** and edit the **`skipWrites`** array.
+- **Valid keys** are defined in [`scripts/ai-sync-shared.js`](./ai-sync-shared.js) (`cursorrules`, `claude`, `windsurf`, `copilot`, `vscode`, `tabnine`, `codewhisperer`, `editorconfig`, `cursorIndex`).
+- **Or** run **`bun run ai:list -- --remove .tabnine --yes --sync-exclude`** so the folder is deleted and the id is appended in one step.
+
+Commit **`ai-sync.exclude.json`** if the team should share the same skips, or keep it local-only.
+
 ### Generated Configurations
 
-Running `pnpm run sync` generates:
+Running `bun run sync` generates:
 
 1. **`.cursorrules`** - Cursor AI configuration
 2. **`CLAUDE.md`** - Claude AI instructions
@@ -32,7 +42,7 @@ Running `pnpm run sync` generates:
 
 ## 📜 Available Scripts
 
-### `pnpm run sync`
+### `bun run sync`
 Generate all AI configurations from DOCS-STANDARDS.md
 
 **When to use:**
@@ -46,14 +56,47 @@ Generate all AI configurations from DOCS-STANDARDS.md
 vim DOCS-STANDARDS.md
 
 # Sync all configurations
-pnpm run sync
+bun run sync
 
 # Commit changes
 git add .
 git commit -m "Update documentation standards"
 ```
 
-### `pnpm run validate`
+### `bun run ai:list`
+
+Lists **which AI/editor directories** exist at the repository root (for example **`.tabnine`**, **`.codewhisperer`**, **`.giga`**, **`.vibe`**, **`.agents`**, skills installs) and shows **synced** root files (`.cursorrules`, `CLAUDE.md`, …). Unknown dot-directories are listed under “Other”. Use **`--json`** for machine-readable output.
+
+**Remove** optional folders only (never `.cursor` / `.vscode` / `.github` whole-tree): dry-run first, then confirm with **`--yes`**:
+
+```bash
+bun run ai:list
+bun run ai:list -- --json
+bun run ai:list -- --remove .giga .vibe --dry-run
+bun run ai:list -- --remove .giga --yes
+```
+
+If you delete **`.tabnine`** or **`.codewhisperer`** without updating **`ai-sync.exclude.json`**, **`bun run sync`** will recreate them. Use **`--sync-exclude`** on remove, or edit **`ai-sync.exclude.json`** (see **Optional: ai-sync.exclude.json** above).
+
+**Interactive (checkbox, arrows + space):** `bun run ai:list -- --interactive` (alias: **`bun run ai:pick`**). Only lists **removable** folders that **exist** on disk. Use **`--interactive --dry-run`** to preview without deleting.
+
+**Script:** [`ai-inventory.js`](./ai-inventory.js) · shared keys: [`ai-sync-shared.js`](./ai-sync-shared.js) · uses [**@inquirer/prompts**](https://github.com/SBoudrias/Inquirer.js) for `--interactive`
+
+### `bun run ai` (unified)
+
+Runs [`ai-check.js`](./ai-check.js):
+
+1. **`bun run sync`** — regenerate configs from DOCS-STANDARDS.md
+2. **Verify** `skills/couchcms-documentation/SKILL.md` (YAML `name` + `description`)
+3. **`bun run validate`** — documentation checks
+
+**When to use:** Before a PR or whenever you want the full AI-tooling pipeline (same as **`bun run ai:update`**).
+
+```bash
+bun run ai
+```
+
+### `bun run validate`
 Validate all documentation files against standards
 
 **Checks:**
@@ -68,7 +111,7 @@ Validate all documentation files against standards
 **Example:**
 ```bash
 # Validate all docs
-pnpm run validate
+bun run validate
 
 # Output example:
 # 🔍 Validating CouchCMS Documentation...
@@ -82,7 +125,7 @@ pnpm run validate
 # Errors:         0 ❌
 ```
 
-### `pnpm run ai:update`
+### `bun run ai:update`
 Sync AI configs AND validate documentation (combined)
 
 **When to use:**
@@ -92,7 +135,7 @@ Sync AI configs AND validate documentation (combined)
 
 **Example:**
 ```bash
-pnpm run ai:update
+bun run ai:update
 ```
 
 ## 🔄 Workflow Examples
@@ -104,10 +147,10 @@ pnpm run ai:update
 vim DOCS-STANDARDS.md
 
 # 2. Sync to all AI tools
-pnpm run sync
+bun run sync
 
 # 3. Validate existing docs still comply
-pnpm run validate
+bun run validate
 
 # 4. Commit if all passes
 git add .
@@ -122,11 +165,11 @@ git commit -m "Update: stricter code block titles"
 # Convert this content about [topic]
 
 # 2. Validate the new file
-pnpm run validate
+bun run validate
 
 # 3. Fix any issues reported
 # 4. Re-validate
-pnpm run validate
+bun run validate
 ```
 
 ### Team Onboarding
@@ -136,7 +179,7 @@ pnpm run validate
 git clone <repo>
 
 # 2. Install dependencies (auto-syncs)
-pnpm install
+bun install
 
 # 3. All AI tools are configured!
 # Start using Cursor, Claude, Copilot, etc.
@@ -144,7 +187,7 @@ pnpm install
 
 ## 🎯 Script Details
 
-### sync-ai-configs.js
+### ai-sync.js
 
 **Purpose:** Generate all AI configurations from single source
 
@@ -165,7 +208,7 @@ pnpm install
 - Reports each file generated
 - Returns exit code 0 on success
 
-### validate-docs.js
+### docs-validate.js
 
 **Purpose:** Validate documentation quality and compliance
 
@@ -251,7 +294,7 @@ cat DOCS-STANDARDS.md
 
 ### Adding New AI Tool
 
-Edit `scripts/sync-ai-configs.js`:
+Edit `scripts/ai-sync.js`:
 
 ```javascript
 // Add new tool configuration
@@ -269,7 +312,7 @@ writeConfig(
 
 ### Adding New Validation
 
-Edit `scripts/validate-docs.js`:
+Edit `scripts/docs-validate.js`:
 
 ```javascript
 // Add new validator function
@@ -297,15 +340,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-      - uses: actions/setup-node@v3
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: '18'
-          cache: 'pnpm'
+          bun-version: latest
 
-      - run: pnpm install
-      - run: pnpm run validate
-      - run: pnpm run build
+      - run: bun install --frozen-lockfile
+      - run: bun run validate
+      - run: bun run build
 ```
 
 ## 🎓 Best Practices
@@ -313,24 +354,24 @@ jobs:
 1. **Always sync after editing standards**
    ```bash
    vim DOCS-STANDARDS.md
-   pnpm run sync
+   bun run sync
    ```
 
 2. **Validate before committing**
    ```bash
-   pnpm run validate
+   bun run validate
    git add .
    git commit -m "Update docs"
    ```
 
 3. **Use ai:update for comprehensive checks**
    ```bash
-   pnpm run ai:update
+   bun run ai:update
    ```
 
 4. **Never edit generated files directly**
    - Edit DOCS-STANDARDS.md
-   - Run `pnpm run sync`
+   - Run `bun run sync`
    - Generated files update automatically
 
 5. **Check validation output**

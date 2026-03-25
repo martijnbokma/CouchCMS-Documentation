@@ -29,7 +29,7 @@ const rootDir = resolve(join(__dirname, ".."));
 
 /**
  * Known tooling locations (directories at repo root unless `path` says otherwise).
- * `sync`: overwritten in part or full by scripts/sync-ai-configs.js when you run bun run sync.
+ * `sync`: overwritten in part or full by scripts/ai-sync.js when you run bun run sync.
  * `skills`: typical Agent Skills CLI (npx/bunx skills) install targets under the repo.
  */
 export const ENTRIES = [
@@ -277,7 +277,7 @@ function printText(report) {
         console.log(`• ${d.path} — ${d.note}`);
     }
 
-    console.log("\nSynced files (root) from DOCS-STANDARDS / sync-ai-configs.js\n");
+    console.log("\nSynced files (root) from DOCS-STANDARDS / ai-sync.js\n");
     for (const f of report.files) {
         console.log(`• ${f.present ? "[on disk]" : "[missing]"} ${f.path} — ${f.label}`);
     }

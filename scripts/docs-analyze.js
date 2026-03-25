@@ -162,7 +162,7 @@ console.log(
     `\n🔗 2. MISSING TRAILING SLASHES (${issuesByType.missingTrailingSlash.length} links)`,
 );
 console.log("   Impact: URL consistency and navigation");
-console.log("   Fix: Can be automated with fix-links.js script\n");
+console.log("   Fix: Can be automated with docs-fix-links.js script\n");
 if (issuesByType.missingTrailingSlash.length > 0) {
     console.log("   Examples:");
     issuesByType.missingTrailingSlash.slice(0, 5).forEach((issue) => {
@@ -231,7 +231,7 @@ console.log("                    RECOMMENDED ACTIONS                     ");
 console.log("═══════════════════════════════════════════════════════════\n");
 
 console.log("1. AUTO-FIX (Easy - can be automated):");
-console.log("   • Missing trailing slashes → Run: pnpm run fix:links");
+console.log("   • Missing trailing slashes → Run: bun run fix:links");
 console.log("   • This will automatically add / to all internal links\n");
 
 console.log("2. MANUAL FIX (Medium - needs review):");
