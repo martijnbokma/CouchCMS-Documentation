@@ -1,0 +1,46 @@
+# Validates MDX and builds the Astro + Starlight site on every push and PR.
+name: CI
+
+on:
+    push:
+        branches:
+            - main
+            - master
+            - docs-v2
+            - gh-pages
+    pull_request:
+
+permissions:
+    contents: read
+
+concurrency:
+    group: ci-${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    validate-and-build:
+        name: Validate and build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 9
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+                  cache: pnpm
+
+            - name: Install dependencies
+              run: pnpm install
+
+            - name: Validate documentation
+              run: pnpm run validate
+
+            - name: Build site
+              run: pnpm run build

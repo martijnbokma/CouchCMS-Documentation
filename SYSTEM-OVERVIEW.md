@@ -68,6 +68,17 @@ Complete visual overview of the documentation AI toolkit architecture.
 └──────────────────────────────────────────────────────────────┘
 ```
 
+## Files overwritten by `pnpm run sync`
+
+Edit **[DOCS-STANDARDS.md](./DOCS-STANDARDS.md)** and run `pnpm run sync` (or `node scripts/sync-ai-configs.js`). Do not hand-edit these generated files:
+
+- `.cursorrules`
+- `CLAUDE.md`
+- `.windsurfrules`
+- `.github/copilot-instructions.md`
+
+**[AGENTS.md](./AGENTS.md)** lists the same set and explains the workflow for AI coding agents.
+
 ## 🔄 Workflow Diagram
 
 ```

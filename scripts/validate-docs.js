@@ -21,6 +21,21 @@ let totalFiles = 0;
 let passedFiles = 0;
 let warnings = [];
 let errors = [];
+/** Count of pages whose `title` is shorter than STYLEGUIDE SEO target (50–60). */
+let shortTitleCount = 0;
+
+/** Title length from frontmatter (null if missing or unparseable). */
+function getTitleLength(content) {
+    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+    if (!frontmatterMatch) {
+        return null;
+    }
+    const titleMatch = frontmatterMatch[1].match(/title:\s*(.+)/);
+    if (!titleMatch) {
+        return null;
+    }
+    return titleMatch[1].replace(/['"]/g, "").trim().length;
+}
 
 // Helper to get all MDX files
 function getAllMdxFiles(dir, fileList = []) {
@@ -65,13 +80,14 @@ function validateFrontmatter(content, file) {
         }
     });
 
-    // Check title length (only maximum)
+    // Title length (STYLEGUIDE / DOCS-STANDARDS: 50–60 characters for SEO)
     const titleMatch = frontmatter.match(/title:\s*(.+)/);
     if (titleMatch) {
         const title = titleMatch[1].replace(/['"]/g, "").trim();
-        if (title.length > 70) {
+        const len = title.length;
+        if (len > 60) {
             issues.push(
-                `⚠️  Title too long (${title.length} chars, maximum 70)`,
+                `⚠️  Title too long (${len} chars; STYLEGUIDE recommends 50–60 for SEO)`,
             );
         }
     }
@@ -224,6 +240,11 @@ function validateFile(filePath) {
 
     const fileIssues = [];
 
+    const titleLen = getTitleLength(content);
+    if (titleLen !== null && titleLen < 50) {
+        shortTitleCount++;
+    }
+
     // Run all validators
     fileIssues.push(...validateFrontmatter(content, relativePath));
     fileIssues.push(...validateHeadings(content, relativePath));
@@ -259,6 +280,13 @@ try {
     console.log(`Found ${mdxFiles.length} documentation files\n`);
 
     mdxFiles.forEach(validateFile);
+
+    if (shortTitleCount > 0) {
+        const msg = `⚠️  Aggregate: ${shortTitleCount} of ${totalFiles} pages have titles shorter than 50 characters (STYLEGUIDE recommends 50–60 for SEO).`;
+        warnings.push(msg);
+        console.log(msg);
+        console.log("");
+    }
 
     // Summary
     console.log("─────────────────────────────────────────────────────");

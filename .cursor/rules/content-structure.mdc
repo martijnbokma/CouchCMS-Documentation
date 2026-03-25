@@ -20,18 +20,16 @@ Section Integration Flow:
 3. Navigation hierarchy derived from file frontmatter metadata
 4. Documentation sections rendered using the Starlight theme templates
 
-Primary Structure:
+Primary structure (actual layout):
 ```
-/src/content/docs/
+src/content/docs/
   ├── getting-started/
-  ├── reference/
-  ├── guides/
-  └── api/
+  ├── concepts/
+  ├── tags-reference/
+  ├── miscellaneous/
+  └── tutorials/
 ```
 
-Technical Importance Scores:
-- Content Collection Organization: 65
-- Navigation Structure: 45
-- Section Integration: 40
+Sidebar order and grouping are defined in `astro.config.mjs` (including nested **Tags Reference** and **Tutorials**).
 
 $END$

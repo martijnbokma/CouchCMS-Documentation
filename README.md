@@ -8,16 +8,18 @@ The documentation is built with [Astro](https://astro.build/) + [Starlight](http
 
 ```
 .
-├── public/                         # Static files (favicons, robots.txt, etc.)
+├── public/                    # Static files (favicons, robots.txt, etc.)
 ├── src/
-│   ├── assets/                     # Images and media
-│   │   ├── content/                # Markdown/MDX documentation files
-│   │   │   ├── docs/               # Main documentation (MDX)
-│   │   │   └── content.config.ts   # Configuration file for the documentation
-│   │   └── img/                    # Image assets
+│   ├── content/
+│   │   └── docs/              # Main documentation (MDX)
+│   ├── content.config.ts      # Content collection configuration
+│   ├── assets/
+│   │   └── img/               # Images used by MDX (organized by type)
 │   ├── astro.config.mjs
-│   ├── package.json
-│   └── tsconfig.json
+│   └── ...
+├── astro.config.mjs           # Root Astro + Starlight config
+├── package.json
+└── tsconfig.json
 ```
 
 - Documentation lives in `src/content/docs/` as `.mdx` files (Markdown + JSX).
@@ -103,16 +105,21 @@ The documentation is built with [Astro](https://astro.build/) + [Starlight](http
 | :--------------------- | :----------------------------------------- |
 | `pnpm install`         | Install dependencies                       |
 | `pnpm dev`             | Start local dev server at `localhost:4321` |
+| `pnpm run validate`    | Run documentation checks (`scripts/validate-docs.js`) |
 | `pnpm build`           | Build production site to `./dist/`         |
 | `pnpm preview`         | Preview build locally before deploying     |
 | `pnpm astro ...`       | Run Astro CLI commands                     |
 | `pnpm astro -- --help` | Get help using the Astro CLI               |
 
+Pull requests run the same **validate** and **build** steps in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). See [AGENTS.md](./AGENTS.md) if validation reports an SEO title aggregate notice.
+
 ---
 
 ## 🤖 AI-Assisted Documentation
 
-This project includes a complete AI toolkit for documentation development:
+This project includes a complete AI toolkit for documentation development.
+
+**For AI coding agents**, start with **[AGENTS.md](./AGENTS.md)** (repo map, commands, generated files).
 
 **Quick Start:**
 ```markdown
@@ -150,6 +157,7 @@ See [AI-TOOLKIT.md](./AI-TOOLKIT.md) for complete details.
 ## Need Help?
 
 ### Documentation & AI Toolkit
+- 🤖 **[AGENTS.md](./AGENTS.md)** - Instructions for AI agents (start here)
 - 🎯 **[SYSTEM-OVERVIEW.md](./SYSTEM-OVERVIEW.md)** - Complete system architecture
 - 🤖 **[AI-TOOLKIT.md](./AI-TOOLKIT.md)** - Main AI toolkit guide
 - 📖 **[STYLEGUIDE.md](./STYLEGUIDE.md)** - Complete style guide

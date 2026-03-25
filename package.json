@@ -16,7 +16,7 @@
         "validate": "node scripts/validate-docs.js",
         "validate:analyze": "node scripts/analyze-validation-issues.js",
         "fix:links": "node scripts/fix-links.js",
-        "ai:update": "bun run sync && bun run validate",
+        "ai:update": "node scripts/sync-ai-configs.js && node scripts/validate-docs.js",
         "pr:since-last": "node scripts/pr-since-last.js",
         "pr:mark-as-merged": "node scripts/pr-mark-merged.js",
         "pr:create": "node scripts/pr-create.js",
@@ -24,7 +24,7 @@
         "pr:guided": "node scripts/pr-guided.js",
         "conflicts:resolve": "node scripts/resolve-conflicts.js",
         "pr:help": "echo '\n📊 PR Tracker:\n  pr:since-last      - Show changes since last upstream PR\n  pr:mark-as-merged  - Mark current upstream state\n  pr:test            - Test PR creation (dry run)\n  pr:create          - Actually create GitHub PR\n  pr:guided          - Step-by-step guided PR creation\n  conflicts:resolve  - Help resolve merge conflicts\n  pr:help            - Show this help\n'",
-        "postinstall": "bun run sync"
+        "postinstall": "node scripts/sync-ai-configs.js"
     },
     "dependencies": {
         "@astro-community/astro-embed-youtube": "^0.5.9",

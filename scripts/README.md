@@ -58,6 +58,7 @@ Validate all documentation files against standards
 
 **Checks:**
 - ✅ Frontmatter presence and completeness
+- ✅ Title length: warns per file if over 60 characters; **aggregate notice** if many pages have titles under 50 characters (STYLEGUIDE SEO target 50–60)
 - ✅ Heading hierarchy (no skipped levels)
 - ✅ Code block formatting
 - ✅ Link structure (trailing slashes)
